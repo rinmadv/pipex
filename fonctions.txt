@@ -1,0 +1,18 @@
+open : ouvre un fichier, renvoie un descripteur de fichier
+close : ferme le fichier
+read : lit des données dans un buffer
+write : ecrit sur un fd
+malloc : alloue un espace mémoire sur la heap
+free : libère l'espace mémoire alloué
+perror : pour des messages d'error (exit avec perror d'une fonction), un peu comme un write(2, "error", 5,)
+strerror : donne un code d'erreur en string
+access : regarde si on a les droits d'acces a un fichier en question
+dup : duplique un fd (ex dupliquer l'entrée standard (0) pour le heredoc)
+dup2 : prend deux arguments (fd1, fd2) et duplique fd1 dans fd2, il va close fd1 et fd1 va prendre la valeur de fd2  
+execve : prend trois arguments (path, argv, envp) et execute le programme
+exit : quite le programme
+fork : duplique le processus
+pipe : faire une connexion entre deux processus
+unlink : supprime un fichier
+wait : attend la fin d'un processus le temps qu'il se termine
+waitpid : attend la fin d'un processus le temps qu'il se termine, prend deux arguments (pid, status), recupere le code d'erreur
