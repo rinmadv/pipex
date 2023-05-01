@@ -6,11 +6,11 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/01 19:11:38 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/01 19:44:33 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "pipex.h"
 
 t_parse	*ft_node_new(char *argv, t_arg_type type, char *path, int fd)
 {
@@ -19,7 +19,7 @@ t_parse	*ft_node_new(char *argv, t_arg_type type, char *path, int fd)
 	new_node = malloc(sizeof(t_parse));
 	if (new_node == NULL)
 		return (NULL);
-	new_node->command = argv;
+	new_node->command = ft_split(argv, " ");
 	new_node->type = type;
 	new_node->path = path;
 	new_node->fd = fd;
@@ -48,12 +48,12 @@ void	ft_node_add_back(t_parse **node, t_parse *new)
 	else
 		*node = new ;
 }
-void	close_fd
 
-(t_parse *node)
+void	ft_parse_del_one(t_parse *node)
 {
 	if (node->type == infile || node->type == outfile)
 		close (node.fd);
+	free (node);
 }
 
 void	ft_parse_clear(t_parse **node)
