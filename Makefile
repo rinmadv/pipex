@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marine <marine@student.42.fr>              +#+  +:+       +#+         #
+#    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/05/02 02:23:03 by marine           ###   ########.fr        #
+#    Updated: 2023/05/02 19:42:37 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FILES = main.c \
 		split_space.c \
 		exec.c
 
-LIBPATH = -L libft/
+LIBPATH = -Llibft
 
 LIBFT = libft/libft.a
 

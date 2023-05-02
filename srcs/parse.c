@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/02 02:24:07 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/02 17:23:32 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	ft_parse_clear(t_parse **node)
 		while (*node)
 		{
 			p = (*node)->next;
+			//free char ** command
+			//free path
 			free (*node);
 			*node = p;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/05/02 02:21:44 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/02 19:31:19 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PIPEX_H
 
 //defines
-# include "../libft/libft.h"
+# include "libft.h"
 
 //defines
 
@@ -35,7 +35,13 @@ typedef struct s_parse
 	struct s_parse		*next;
 }			t_parse;
 
-/* Parsing - arguments */
+typedef struct s_data
+{
+	char	**path;
+	t_parse	*first_arg;
+}			t_data;
+
+/* Parsing - liste chainees arguments */
 t_parse	*ft_node_new(char *argv, t_arg_type type);
 t_parse	*ft_node_last(t_parse *node);
 void	ft_node_add_back(t_parse **node, t_parse *new);
@@ -43,6 +49,8 @@ void	ft_parse_del_one(t_parse *node);
 void	ft_parse_clear(t_parse **node);
 
 /* Parsing - autre */
+int		parsing(char **argv, t_parse *argument, int argc, char **envp);
+int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 
 //executions
