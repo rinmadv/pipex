@@ -6,7 +6,7 @@
 #    By: marine <marine@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/05/01 17:48:22 by marine           ###   ########.fr        #
+#    Updated: 2023/05/02 02:23:03 by marine           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ CFLAGS = -Wall -Wextra -Werror -g3 $(INCDIR)
 EXEC = pipex
 FILES = main.c \
 		parsing.c \
+		parse.c \
+		split_space.c \
+		exec.c
 
 LIBPATH = -L libft/
 

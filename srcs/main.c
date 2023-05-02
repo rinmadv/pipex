@@ -6,61 +6,52 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/01 18:55:58 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/02 02:19:41 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "pipex.h"
 
-int check_infile(char *argv, t_parse *argument)
+t_arg_type	check_type(int i, int argc)
 {
-	int	fd;
+	t_arg_type	type;
 
-	fd = open(argv, O_RDONLY);
-	if (fd == -1)
-		return(write(2, "No such file or directory.\n", 27), -1);
-	argument = malloc(sizeof(t_parse));
-	if (argument == NULL)
-		return (-1);
-	argument->command = argv;
-	argument->type = infile;
-	argument->path = NULL;
-	argument->fd = fd;
-	return (0);
+	if (i == 1)
+		type = infile;
+	else if (i == argc - 1)
+		type = outfile;
+	else
+		type = command;
+	return (type);
 }
 
-int check_commands(char **argv, t_parse *argument, int argc, char **envp)
+int	parsing(char **argv, t_parse *argument, int argc, char **envp)
 {
-	int i;
-	i = 2;
-	while (argv[i])
+	int			i;
+	t_parse		*new;
+
+	i = 1;
+	while (i < argc)
 	{
-		
-		argument->next = malloc(sizeof(t_parse))
-		// if (argument.next == NULL)
-			//supprimer les maillons précédents
-		argument = argument
+		new = ft_node_new(argv[i], check_type(i, argc));
+		if (new == NULL)
+			return (ft_parse_clear(&argument), -1);
+		ft_node_add_back(&argument, new);
 		i++;
 	}
+	return (0);
+	(void) envp;
 }
 
-int parsing(char **argv, t_parse *argument, int argc, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	//checker infile
-	if (check_infile(argv[1], argument) == -1)
-		return (-1);
-	//checker commandes
-	
-	//mettre outfile dans un maillon
-}
+	t_parse	*argument;
 
-int main(int argc, char **argv, char **envp)
-{
-	t_parse	argument;
-
+	argument = NULL;
 	if (argc < 5)
 		return (1);
-	if (parsing(argv, &argument, argc, envp) == -1)
+	(void) envp;
+	if (parsing(argv, argument, argc, envp) == -1)
 		return (1);
-	
+	return (0);
 }

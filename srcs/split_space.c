@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 19:47:29 by marine            #+#    #+#             */
-/*   Updated: 2023/05/02 00:38:40 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/02 00:39:47 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	clear_split(char **split, int words)
 	free(split);
 }
 
-char	**ft_split(char const *str)
+char	**ft_split_space(char const *str)
 {
 	char	**tab;
 	int		words;
