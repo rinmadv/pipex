@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 19:17:03 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 23:55:56 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,30 @@ int	check_outfile(t_parse *argument)
 }
 
 
-
-int	do_command(t_data *data)
+int	do_command(t_data *data, t_parse *current_arg)
 {
-	int	i;
+	int		i;
+	char	*command;
+	char	*command_path;
+	int		return_value;
 
 	i = 0;
+	command = ft_strjoin("/", current_arg->command[0]);
+	command_path = NULL;
 	while(data->path[i])
 	{
-		ft_strjoin(data->path[i])
+		command_path = ft_strjoin(data->path[i], command);
+		return_value = access(command_path, F_OK);
+		if (return_value == 0)
+		{
+			free(command_path);
+			free(command);
+			return(1);
+		}
+		i++;
+		free(command_path);
 	}
+	free(command); // penser a free s ca free
 	return (0);
 }
 
@@ -72,8 +86,12 @@ int	exec(t_data *data)
 	if (check_infile(data->first_arg) == -1)
 		data->first_arg = data->first_arg->next->next;
 	else
+	{	
 		// executer la commande
-	while (data->first_arg->next->type != outfile)
+		data->first_arg = data->first_arg->next;
+	}
+	// while (data->first_arg->next->type != outfile)
+		do_command(data, data->first_arg);
 		//executer les autres commandes;
 	/* check de la derniere commande
 	printf("outfile : %s\n", data->first_arg->command[0]);
