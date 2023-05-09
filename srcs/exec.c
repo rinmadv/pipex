@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 18:20:53 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:17:03 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ int	check_outfile(t_parse *argument)
 	return (0);
 }
 
+
+
+int	do_command(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while(data->path[i])
+	{
+		ft_strjoin(data->path[i])
+	}
+	return (0);
+}
+
 int	exec(t_data *data)
 {
 	t_parse	*temp;
@@ -57,11 +71,17 @@ int	exec(t_data *data)
 	temp = data->first_arg;
 	if (check_infile(data->first_arg) == -1)
 		data->first_arg = data->first_arg->next->next;
-	while (data->first_arg->next)
-		data->first_arg = data->first_arg->next;
+	else
+		// executer la commande
+	while (data->first_arg->next->type != outfile)
+		//executer les autres commandes;
+	/* check de la derniere commande
 	printf("outfile : %s\n", data->first_arg->command[0]);
-	check_outfile(data->first_arg);
-	// voir ce que je dois faire ...
+	if (check_outfile(data->first_arg) == -1)
+		return (-1);
+	else
+		//executer la derniere commande
+	*/
 	data->first_arg = temp;
 	return (0);
 }
