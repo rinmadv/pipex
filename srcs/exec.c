@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 15:47:43 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 18:20:53 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,16 @@ int	check_outfile(t_parse *argument)
 
 int	exec(t_data *data)
 {
-	t_data	*temp;
+	t_parse	*temp;
 
-	temp = data;
+	temp = data->first_arg;
 	if (check_infile(data->first_arg) == -1)
 		data->first_arg = data->first_arg->next->next;
 	while (data->first_arg->next)
 		data->first_arg = data->first_arg->next;
 	printf("outfile : %s\n", data->first_arg->command[0]);
 	check_outfile(data->first_arg);
-	// checker leaks
 	// voir ce que je dois faire ...
-	data = temp;
+	data->first_arg = temp;
 	return (0);
 }
