@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:57:16 by madavid           #+#    #+#             */
-/*   Updated: 2023/02/08 17:43:20 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 15:17:52 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_get_next_line(int fd);
-int		ft_printf(const char *str, ...);
-void	ft_args_pf(char c, va_list ap, int *n);
-void	ft_putchar_pf(char c, int *n);
-void	ft_putstr_pf(char *str, int *n);
-void	ft_putnbr_pf(long long int nb, int *n, int is_unsigned);
-void	ft_puthexa_pf(unsigned long long int nb, int *n, int c);
-void	ft_putptr_pf(unsigned long int ptr, int *n);
+int		ft_printf(int output, const char *str, ...);
+void	ft_args_pf(int output, char c, va_list ap, int *n);
+void	ft_putchar_pf(int output, char c, int *n);
+void	ft_putstr_pf(int output, char *str, int *n);
+void	ft_putnbr_pf(int output, long long int nb, int *n, int is_unsigned);
+void	ft_puthexa_pf(int output, unsigned long long int nb, int *n, int c);
+void	ft_putptr_pf(int output, unsigned long int ptr, int *n);
 
 #endif
