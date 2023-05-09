@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/05/02 19:30:38 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 11:53:52 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	parse_envp(t_data *data, char **envp)
 	if (data->path == NULL)
 		return (-1);
 	return (0);
-	
 }
 
 t_arg_type	check_type(int i, int argc)
@@ -45,7 +44,7 @@ t_arg_type	check_type(int i, int argc)
 	return (type);
 }
 
-int	parsing(char **argv, t_parse *argument, int argc, char **envp)
+int	parsing(char **argv, t_parse **argument, int argc, char **envp)
 {
 	int			i;
 	t_parse		*new;
@@ -55,8 +54,8 @@ int	parsing(char **argv, t_parse *argument, int argc, char **envp)
 	{
 		new = ft_node_new(argv[i], check_type(i, argc));
 		if (new == NULL)
-			return (ft_parse_clear(&argument), -1);
-		ft_node_add_back(&argument, new);
+			return (ft_parse_clear(argument), -1);
+		ft_node_add_back(argument, new);
 		i++;
 	}
 	return (0);

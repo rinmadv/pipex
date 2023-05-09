@@ -6,57 +6,53 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/05/02 19:42:37 by madavid          ###   ########.fr        #
+#    Updated: 2023/05/09 11:53:02 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+SRCS_FILES	= main.c \
+			parsing.c \
+			lst.c \
+			lst_free.c \
+			split_space.c \
+			exec.c
 
-SRCDIR = srcs
-BONUSDIR = bonus
-INCDIR = -Iheader -Ilibft
+PREFIX	= srcs
 
-# Compilation options
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 $(INCDIR)
-
-# Files
-EXEC = pipex
-FILES = main.c \
-		parsing.c \
-		parse.c \
-		split_space.c \
-		exec.c
-
-LIBPATH = -Llibft
-
-LIBFT = libft/libft.a
-
-SRCS = $(addprefix srcs/,$(FILES))
+SRCS = $(addprefix ${PREFIX}/, ${SRCS_FILES})
 
 OBJS = $(SRCS:.c=.o)
 
-DEPENDS = ${SRCS:.c=.d}
+LIB = -Llibft -lft
 
-# Rules
-all: $(EXEC)
+INCLUDE	= -Ilibft -Iheader
 
-$(EXEC): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBPATH) -o $(EXEC)
+CC    = cc
 
-$(LIBFT):
-	make -C libft
+FLAGS  = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
--include $(DEPENDS)
+NAME    = pipex
+
+DEPS			=	${SRCS:.c=.d}
+
+.c.o:
+	${CC} ${FLAGS} ${CDFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
+
+${NAME}: ${OBJS}
+	${MAKE} -C libft
+	${CC} ${FLAGS} ${OBJS} ${LIB} -o ${NAME}
+
+all: ${NAME}
 
 clean:
-	rm -rf $(OBJS)
+	${MAKE} -C libft clean
+	rm -f ${OBJS}
 	rm -f ${DEPS}
-	make -C libft clean
-	
+
 fclean: clean
-	rm -f $(EXEC)
-	make -C libft fclean
-	
+	${MAKE} -C libft fclean
+	rm -f ${NAME}
+
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: re fclean all

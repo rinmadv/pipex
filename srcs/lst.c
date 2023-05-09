@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/02 17:23:32 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 11:52:47 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,4 @@ void	ft_node_add_back(t_parse **node, t_parse *new)
 	}
 	else
 		*node = new ;
-}
-
-void	ft_parse_del_one(t_parse *node)
-{
-	if (node->type == infile || node->type == outfile)
-		close (node->fd);
-	free (node);
-}
-
-void	ft_parse_clear(t_parse **node)
-{
-	t_parse	*p;
-
-	if (node)
-	{
-		p = *node;
-		while (*node)
-		{
-			p = (*node)->next;
-			//free char ** command
-			//free path
-			free (*node);
-			*node = p;
-		}
-	}
 }
