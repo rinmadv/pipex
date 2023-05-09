@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 15:45:12 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 15:47:43 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	exec(t_data *data)
 		data->first_arg = data->first_arg->next;
 	printf("outfile : %s\n", data->first_arg->command[0]);
 	check_outfile(data->first_arg);
+	// checker leaks
+	// voir ce que je dois faire ...
 	data = temp;
 	return (0);
 }
