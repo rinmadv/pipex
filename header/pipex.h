@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 11:43:03 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 14:31:48 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,20 @@ typedef struct s_data
 t_parse	*ft_node_new(char *argv, t_arg_type type);
 t_parse	*ft_node_last(t_parse *node);
 void	ft_node_add_back(t_parse **node, t_parse *new);
+void	print_lst(t_parse *node);
+
+/* Parsing - free liste chainees arguments */
 void	ft_parse_del_one(t_parse *node);
-void	ft_path_clear(char **path);
-void	ft_parse_clear(t_parse **node);
 void	ft_data_clear(t_data *data);
+void	ft_parse_clear(t_parse **node);
+void	ft_free_2d_array(char **path);
 
 /* Parsing - autre */
 int		parsing(char **argv, t_parse **argument, int argc, char **envp);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 
-//executions
+/* Executuion */
+int		exec(t_data *data);
 
 #endif

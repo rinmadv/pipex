@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 11:52:47 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/09 14:35:26 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ void	ft_node_add_back(t_parse **node, t_parse *new)
 	}
 	else
 		*node = new ;
+}
+
+void	print_lst(t_parse *node)
+{
+	int i = 0;
+	while (node)
+	{
+		int j = 0;
+		while (node->command[j])
+		{
+			printf("arg [%d][%d] = %s\n", i, j, node->command[j]);
+			j++;
+		}
+		i++;
+		node = node->next;
+	}
 }
