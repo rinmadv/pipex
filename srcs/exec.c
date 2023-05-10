@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 23:55:56 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/10 23:42:04 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 
 int	check_infile(t_parse *argument)
 {
-	int	fd;
-
-	fd = access(argument->command[0], F_OK);
-	if (fd == -1)
+	argument->fd = access(argument->command[0], F_OK);
+	if (argument->fd == -1)
 	{
-		ft_printf(2, "zsh: no such file or directory: %s\n", argument->command[0]);
-		close(fd);
+		ft_printf(2, "no such file or directory: %s\n", argument->command[0]);
 		return (-1);
 	}
-	fd = open(argument->command[0], O_RDONLY);
-	if (fd == -1)
+	argument->fd = open(argument->command[0], O_RDONLY);
+	if (argument->fd == -1)
 	{
-		ft_printf(2, "zsh: permission denied: %s\n", argument->command[0]);
-		close(fd);
+		ft_printf(2, "permission denied: %s\n", argument->command[0]);
 		return (-1);
 	}
-	close(fd);
 	return (0);
 }
 
@@ -50,32 +45,45 @@ int	check_outfile(t_parse *argument)
 	return (0);
 }
 
+// checker si /
 
-int	do_command(t_data *data, t_parse *current_arg)
+int is_path(t_parse *current_arg)
+{
+	
+}
+
+
+int	execute(t_data *data, t_parse *current_arg)
 {
 	int		i;
 	char	*command;
 	char	*command_path;
-	int		return_value;
 
 	i = 0;
 	command = ft_strjoin("/", current_arg->command[0]);
+	if (command == NULL)
+		return (-1);
 	command_path = NULL;
 	while(data->path[i])
 	{
 		command_path = ft_strjoin(data->path[i], command);
-		return_value = access(command_path, F_OK);
-		if (return_value == 0)
+		if (command_path == NULL)
 		{
+			free (command);	
+			return (-1);
+		}
+		if (access(command_path, F_OK) == 0)
+		{
+			current_arg->path = command_path;
 			free(command_path);
 			free(command);
-			return(1);
+			return;
 		}
 		i++;
 		free(command_path);
 	}
-	free(command); // penser a free s ca free
-	return (0);
+	current_arg->path = NULL;
+	free(command);
 }
 
 int	exec(t_data *data)
@@ -91,7 +99,14 @@ int	exec(t_data *data)
 		data->first_arg = data->first_arg->next;
 	}
 	// while (data->first_arg->next->type != outfile)
-		do_command(data, data->first_arg);
+	if (data->first_arg->path != NULL)
+		execute(data, data->first_arg);
+	if (data->first_arg->path != NULL)
+	{
+		data->first_arg = data->first_arg;
+		ft_printf(2, )
+	}
+	(void) data;
 		//executer les autres commandes;
 	/* check de la derniere commande
 	printf("outfile : %s\n", data->first_arg->command[0]);
@@ -103,3 +118,4 @@ int	exec(t_data *data)
 	data->first_arg = temp;
 	return (0);
 }
+

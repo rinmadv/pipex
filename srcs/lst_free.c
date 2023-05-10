@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 12:55:48 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/10 19:03:11 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_free_2d_array(char **path)
 	int	i;
 
 	i = 0;
+	if (path == NULL)
+		return ;
 	while (path[i])
 	{
 		ft_bzero(path[i], ft_strlen(path[i]));
