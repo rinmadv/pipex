@@ -1,0 +1,38 @@
+
+
+- PARSING -
+
+1) parser les arguments : 
+	- file parsing.c, fonctions :
+		- int	parsing(char **argv, t_parse **argument, int argc, char **envp);
+		- t_arg_type	check_type(int i, int argc);
+	- file list.c, 
+		- fonctions pour creer des maillons de liste chainees et les ajouter a la suite
+		- fonction ppur print la listes
+	- file lst_free.c,
+		- fonction pour supprimer des maillions, la struct datam les 2d array, et un maillon
+
+2) Parser l'environnement
+	--> comment faire si pqs d'env ?
+
+
+- EXECUTION -
+
+1) checker l'infile : 
+	- file exec.c, fonctions :
+		- int	check_infile(t_parse *argument)
+
+	a) Si pas de file ou pas les droits, aller deux commandes plus loin
+	b) Sinon, 
+		i) lire le fichier
+		ii) executer la commande
+
+2) Tant qu'on n'est pas sur le dernier arg (outfile), executer les commandes
+
+
+
+
+- Ou j'en suis acutellement -
+
+Executer les command
+	

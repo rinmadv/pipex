@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/05/12 12:13:16 by marine           ###   ########.fr       */
+/*   Updated: 2023/05/16 14:23:14 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ char	**ft_split_space(char const *str);
 
 /* Executuion */
 int		exec(t_data *data);
+
+/* Check files */
+int		check_infile(t_parse *argument);
+int		check_outfile(t_parse *argument);
 
 #endif

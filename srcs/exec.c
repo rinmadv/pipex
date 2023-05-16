@@ -6,53 +6,23 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/10 23:42:04 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/16 14:28:28 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 
-int	check_infile(t_parse *argument)
-{
-	argument->fd = access(argument->command[0], F_OK);
-	if (argument->fd == -1)
-	{
-		ft_printf(2, "no such file or directory: %s\n", argument->command[0]);
-		return (-1);
-	}
-	argument->fd = open(argument->command[0], O_RDONLY);
-	if (argument->fd == -1)
-	{
-		ft_printf(2, "permission denied: %s\n", argument->command[0]);
-		return (-1);
-	}
-	return (0);
-}
-
-int	check_outfile(t_parse *argument)
-{
-	int	fd;
-
-	fd = open(argument->command[0], O_WRONLY | O_CREAT | O_TRUNC);
-	if (fd == -1)
-	{
-		ft_printf(2, "zsh: permission denied: %s\n", argument->command[0]);
-		close(fd);
-		return (-1);
-	}
-	close(fd);
-	return (0);
-}
 
 // checker si /
 
 int is_path(t_parse *current_arg)
 {
-	
+	(void) current_arg;
+	return (1);
 }
 
-
+/* a checker */
 int	execute(t_data *data, t_parse *current_arg)
 {
 	int		i;
@@ -77,13 +47,14 @@ int	execute(t_data *data, t_parse *current_arg)
 			current_arg->path = command_path;
 			free(command_path);
 			free(command);
-			return;
+			return (1);
 		}
 		i++;
 		free(command_path);
 	}
 	current_arg->path = NULL;
 	free(command);
+	return (-1);
 }
 
 int	exec(t_data *data)
@@ -95,16 +66,19 @@ int	exec(t_data *data)
 		data->first_arg = data->first_arg->next->next;
 	else
 	{	
+		//lire le fichier
 		// executer la commande
 		data->first_arg = data->first_arg->next;
 	}
+
+	/* Plus tard
 	// while (data->first_arg->next->type != outfile)
 	if (data->first_arg->path != NULL)
 		execute(data, data->first_arg);
 	if (data->first_arg->path != NULL)
 	{
 		data->first_arg = data->first_arg;
-		ft_printf(2, )
+		ft_printf(2, "Path : %s\n", data->first_arg->path[0]);
 	}
 	(void) data;
 		//executer les autres commandes;

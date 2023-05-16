@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/05/10 19:01:04 by madavid          ###   ########.fr        #
+#    Updated: 2023/05/16 14:18:21 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRCS_FILES	= main.c \
 			lst.c \
 			lst_free.c \
 			split_space.c \
-			exec.c
+			exec.c \
+			arg_files.c
 
 PREFIX	= srcs
 
