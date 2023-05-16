@@ -6,55 +6,80 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/16 14:28:28 by madavid          ###   ########.fr       */
+/*   Updated: 2023/05/16 17:36:51 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-
-// checker si /
-
-int is_path(t_parse *current_arg)
+int is_path(char *current_arg)
 {
-	(void) current_arg;
-	return (1);
-}
-
-/* a checker */
-int	execute(t_data *data, t_parse *current_arg)
-{
-	int		i;
-	char	*command;
-	char	*command_path;
+	int	i;
 
 	i = 0;
-	command = ft_strjoin("/", current_arg->command[0]);
-	if (command == NULL)
-		return (-1);
-	command_path = NULL;
+	while (current_arg[i])
+	{
+		if (current_arg[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int find_path(t_data *data, t_parse *current_arg,char *cmd,char *cmd_path)
+{
+	int		i;
+
+	i = 0;
 	while(data->path[i])
 	{
-		command_path = ft_strjoin(data->path[i], command);
-		if (command_path == NULL)
+		cmd_path = ft_strjoin(data->path[i], cmd);
+		if (cmd_path == NULL)
 		{
-			free (command);	
+			free (cmd);	
 			return (-1);
 		}
-		if (access(command_path, F_OK) == 0)
+		if (access(cmd_path, F_OK) == 0)
 		{
-			current_arg->path = command_path;
-			free(command_path);
-			free(command);
+			current_arg->path = cmd_path;
+			free(cmd_path);
+			free(cmd);
 			return (1);
 		}
 		i++;
-		free(command_path);
+		free(cmd_path);
 	}
-	current_arg->path = NULL;
-	free(command);
-	return (-1);
+}
+
+/* a checker */
+int	check_cmd(t_data *data, t_parse *current_arg)
+{
+	char	*cmd;
+	char	*cmd_path;
+
+	if (is_path(current_arg->command[0]) == 1)
+	{
+		cmd_path = current_arg->command[0];
+		if (access(cmd_path, F_OK) == 0)
+		{
+			current_arg->path = cmd_path;
+			return (free(cmd_path), 1);
+		}
+		else
+			return (free(cmd_path), -1);
+	}
+	else
+	{
+		cmd = ft_strjoin("/", current_arg->command[0]);
+		if (cmd == NULL)
+			return (-1);
+		cmd_path = NULL;
+		if (find_path(data, current_arg, cmd, cmd_path) == - 1)
+			return (-1);
+		current_arg->path = NULL;
+		free(cmd);
+		return (-1);
+	}
 }
 
 int	exec(t_data *data)
@@ -66,8 +91,14 @@ int	exec(t_data *data)
 		data->first_arg = data->first_arg->next->next;
 	else
 	{	
+		
 		//lire le fichier
 		// executer la commande
+		// execve()
+		printf("path to cmd = [%s]\n", )
+		printf("")
+		printf("")
+		printf("")
 		data->first_arg = data->first_arg->next;
 	}
 
@@ -93,3 +124,32 @@ int	exec(t_data *data)
 	return (0);
 }
 
+
+
+while (we have cmds to run)
+{
+	pid = fork();
+	if (pid == 0) si c'est l'enfant
+	{
+		do exec stuff, l'enfant va faire nos affaires et executer la command
+		
+	}
+	else		si c'est le parent on continue le while
+	
+}
+
+dup2(infile, STDIN_FILENO);
+
+on a lance tous les enfants 
+-> on wait les enfants, le temps qu'ils finissent leur execution
+
+
+
+
+first child > infile
+
+all the childs in the middle 
+
+last child > outfile
+
+le gros probleme ==== PIPES et dans une moindre mesure les dups
