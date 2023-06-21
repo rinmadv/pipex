@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/16 17:36:51 by madavid          ###   ########.fr       */
+/*   Updated: 2023/06/21 23:26:04 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,16 @@ int	exec(t_data *data)
 	t_parse	*temp;
 
 	temp = data->first_arg;
+
+
+
+
+
+
+
+
+
+	
 	if (check_infile(data->first_arg) == -1)
 		data->first_arg = data->first_arg->next->next;
 	else

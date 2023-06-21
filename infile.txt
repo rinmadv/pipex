@@ -1,0 +1,10 @@
+fonctions.txt
+grep
+header
+infile.txt
+libft
+Makefile
+outfile.txt
+README.md
+srcs
+to_do_pipex.txt
