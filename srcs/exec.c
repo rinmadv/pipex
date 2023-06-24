@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/06/24 14:19:40 by madavid          ###   ########.fr       */
+/*   Updated: 2023/06/24 20:11:12 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int is_path(char *current_arg)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (current_arg[i])
@@ -26,17 +26,17 @@ int is_path(char *current_arg)
 	return (0);
 }
 
-int find_path(t_data *data, t_parse *current_arg,char *cmd,char *cmd_path)
+int find_path(t_data *data, t_parse *current_arg, char *cmd, char *cmd_path)
 {
-	int		i;
+	int i;
 
 	i = 0;
-	while(data->path[i])
+	while (data->path[i])
 	{
 		cmd_path = ft_strjoin(data->path[i], cmd);
 		if (cmd_path == NULL)
 		{
-			free (cmd);	
+			free(cmd);
 			return (-1);
 		}
 		if (access(cmd_path, F_OK) == 0)
@@ -52,10 +52,10 @@ int find_path(t_data *data, t_parse *current_arg,char *cmd,char *cmd_path)
 }
 
 /* a checker */
-int	check_cmd(t_data *data, t_parse *current_arg)
+int check_cmd(t_data *data, t_parse *current_arg)
 {
-	char	*cmd;
-	char	*cmd_path;
+	char *cmd;
+	char *cmd_path;
 
 	if (is_path(current_arg->command[0]) == 1)
 	{
@@ -74,7 +74,7 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 		if (cmd == NULL)
 			return (-1);
 		cmd_path = NULL;
-		if (find_path(data, current_arg, cmd, cmd_path) == - 1)
+		if (find_path(data, current_arg, cmd, cmd_path) == -1)
 			return (-1);
 		current_arg->path = NULL;
 		free(cmd);
@@ -82,16 +82,51 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 	}
 }
 
-int	exec(t_data *data)
+void redirect(t_data *data, t_parse *arg)
 {
-	t_parse	*temp;
+	if (arg->type == infile)
+	{
+		check_infile(arg);
+		close(data->fd[1]); //ferme l'entre
+		dup2(arg->fd, data->fd[1]);
+		close(arg->fd);
+	}
+	else if (arg->type == outfile)
+	{
+		/* code */
+	}
+	else
+	{
+		check_outfile(arg);
+		close(data->fd[0]);
+		dup2(arg->fd, data->fd[0]);
+		close(arg->fd);
+		// je fais quoi si le retour de check outfile est -1 ? je close mais mais output vont ou ??
+	}
+}
+
+int exec(t_data *data)
+{
+	t_parse *temp;
+	int id;
 
 	temp = data->first_arg;
+	while (data->first_arg->type != NULL)
+	{
+		if (pipe(data->fd) == -1)
+			return (-1);
+		id = fork();
+		if (id != 0)
+			wait();
+		if (id == 0) // is child
+		{
 
-	if (check_infile(data->first_arg) == -1)
-		data->first_arg = data->first_arg->next->next;
-	else
-	
+			
+		}
+		else
+			// autre chose
+			data->first_arg = data->first_arg->next;
+	}
 	data->first_arg = temp;
 	return (0);
 }

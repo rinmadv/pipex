@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/05/16 14:23:14 by madavid          ###   ########.fr       */
+/*   Updated: 2023/06/24 18:22:32 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_parse
 typedef struct s_data
 {
 	char	**path;
+	int		fd[2];
 	t_parse	*first_arg;
 }			t_data;
 
