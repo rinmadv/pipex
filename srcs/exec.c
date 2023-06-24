@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/06/24 20:11:12 by madavid          ###   ########.fr       */
+/*   Updated: 2023/06/24 22:03:46 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,18 @@ void redirect(t_data *data, t_parse *arg)
 	}
 }
 
+void	execute_child(t_data *data, t_parse *arg)
+{
+	
+	close(data->fd[1]);
+}
+
+void	execute_parent(t_data *data, t_parse *arg)
+{
+	close(data->fd[0]);
+}
+
+
 int exec(t_data *data)
 {
 	t_parse *temp;
@@ -113,19 +125,20 @@ int exec(t_data *data)
 	temp = data->first_arg;
 	while (data->first_arg->type != NULL)
 	{
-		if (pipe(data->fd) == -1)
+		if (pipe(data->fd) < 0)
 			return (-1);
 		id = fork();
 		if (id != 0)
 			wait();
 		if (id == 0) // is child
 		{
-
-			
+			redirect(data, data->first_arg);
+			if (data->first_arg->type == command)
+				execute_child(data, data->first_arg);
 		}
 		else
-			// autre chose
-			data->first_arg = data->first_arg->next;
+			execute_parent(data, data->first_arg);
+		data->first_arg = data->first_arg->next;
 	}
 	data->first_arg = temp;
 	return (0);
