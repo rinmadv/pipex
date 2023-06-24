@@ -1,10 +1,5 @@
-fonctions.txt
-grep
-header
-infile.txt
-libft
-Makefile
-outfile.txt
-README.md
-srcs
-to_do_pipex.txt
+hihi
+bjr
+je 
+m4apele rinmq
+ciao bye bye
