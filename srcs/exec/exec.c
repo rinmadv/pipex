@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 15:31:46 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:09:20 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	execute_child(t_data *data, t_parse *arg)
 {
 	if (!check_cmd(data, arg))
-		ft_printf(2, "%s: command not found\n", arg->command[0]);
+		exit (126);
+	execve
 }
 
 int	exec(t_data *data)

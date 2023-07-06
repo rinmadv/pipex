@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/05/16 14:25:28 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/06 16:12:59 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int argc, char **argv, char **envp)
 	data.first_arg = NULL;
 	if (argc < 5)
 		return (1);
-	(void) envp;
 	if (parsing(argv, &data.first_arg, argc, envp) == -1)
 		return (1);
 	if (parse_envp(&data, envp) == -1)

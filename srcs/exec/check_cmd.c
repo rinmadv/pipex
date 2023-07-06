@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 15:29:01 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:14:23 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	is_path(char *current_arg)
 
 int	find_path(t_data *data, t_parse *current_arg, char *cmd)
 {
-	int	i;
-	char *cmd_path;
-	
+	int		i;
+	char	*cmd_path;
+
 	i = 0;
 	cmd_path = NULL;
-	while (data->path[i])
+	while (data->path && data->path[i])
 	{
 		cmd_path = ft_strjoin(data->path[i], cmd);
 		if (cmd_path == NULL)
@@ -55,20 +55,20 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 	char	*cmd;
 
 	if (is_path(current_arg->command[0]) == 1)
+		current_arg->path = current_arg->command[0];
+	else
 	{
-		if (access(current_arg->command[0], F_OK) == 0)
-		{
-			current_arg->path = current_arg->command[0];
-			return (1);
-		}	
-		return (-1);
+		cmd = ft_strjoin("/", current_arg->command[0]);
+		if (cmd == NULL)
+			return (-1);
+		current_arg->path = current_arg->command[0];
+		if (find_path(data, current_arg, cmd) == -1)
+			return (-1);
+		free(cmd);
 	}
-	cmd = ft_strjoin("/", current_arg->command[0]);
-	if (cmd == NULL)
-		return (-1);
-	current_arg->path = current_arg->command[0]; // check si malloc ? 
-	if (find_path(data, current_arg, cmd) == -1)
-		return (-1);
-	free(cmd);
+	if (access(current_arg->path, F_OK) != 0)
+		return (ft_printf(2, "%s: command not found\n", current_arg->path), -1);
+	if (access(current_arg->path, X_OK) != 0)
+		return (ft_printf(2, "%s: permission denied\n", current_arg->path), -1);
 	return (1);
 }
