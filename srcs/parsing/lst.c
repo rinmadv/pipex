@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 14:35:26 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/06 11:19:22 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ void	ft_node_add_back(t_parse **node, t_parse *new)
 
 void	print_lst(t_parse *node)
 {
-	int i = 0;
+	int	i;
+	int	j;
+
+	i = 0;
 	while (node)
 	{
-		int j = 0;
+		j = 0;
 		while (node->command[j])
 		{
 			printf("arg [%d][%d] = %s\n", i, j, node->command[j]);

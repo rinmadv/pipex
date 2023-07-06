@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
+#    By: marine <marine@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/06/24 17:47:32 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/06 11:10:14 by marine           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES	= main.c \
-			parsing.c \
-			lst.c \
-			lst_free.c \
-			split_space.c \
-			exec.c \
-			arg_files.c
+			parsing/parsing.c \
+			parsing/lst.c \
+			parsing/lst_free.c \
+			parsing/split_space.c \
+			exec/exec.c \
+			exec/arg_files.c
 
 PREFIX	= srcs
 

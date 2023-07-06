@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/06/24 22:03:46 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/06 11:20:17 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int is_path(char *current_arg)
+int	is_path(char *current_arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (current_arg[i])
@@ -26,9 +26,9 @@ int is_path(char *current_arg)
 	return (0);
 }
 
-int find_path(t_data *data, t_parse *current_arg, char *cmd, char *cmd_path)
+int	find_path(t_data *data, t_parse *current_arg, char *cmd, char *cmd_path)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (data->path[i])
@@ -52,10 +52,10 @@ int find_path(t_data *data, t_parse *current_arg, char *cmd, char *cmd_path)
 }
 
 /* a checker */
-int check_cmd(t_data *data, t_parse *current_arg)
+int	check_cmd(t_data *data, t_parse *current_arg)
 {
-	char *cmd;
-	char *cmd_path;
+	char	*cmd;
+	char	*cmd_path;
 
 	if (is_path(current_arg->command[0]) == 1)
 	{
@@ -82,7 +82,7 @@ int check_cmd(t_data *data, t_parse *current_arg)
 	}
 }
 
-void redirect(t_data *data, t_parse *arg)
+void	redirect(t_data *data, t_parse *arg)
 {
 	if (arg->type == infile)
 	{
@@ -107,7 +107,6 @@ void redirect(t_data *data, t_parse *arg)
 
 void	execute_child(t_data *data, t_parse *arg)
 {
-	
 	close(data->fd[1]);
 }
 
@@ -116,11 +115,10 @@ void	execute_parent(t_data *data, t_parse *arg)
 	close(data->fd[0]);
 }
 
-
-int exec(t_data *data)
+int	exec(t_data *data)
 {
-	t_parse *temp;
-	int id;
+	t_parse	*temp;
+	int		id;
 
 	temp = data->first_arg;
 	while (data->first_arg->type != NULL)
