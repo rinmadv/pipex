@@ -1,0 +1,74 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
+/*   Updated: 2023/07/06 15:29:01 by marine           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "pipex.h"
+
+// faire attention aux -1
+int	is_path(char *current_arg)
+{
+	int	i;
+
+	i = 0;
+	while (current_arg[i])
+	{
+		if (current_arg[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	find_path(t_data *data, t_parse *current_arg, char *cmd)
+{
+	int	i;
+	char *cmd_path;
+	
+	i = 0;
+	cmd_path = NULL;
+	while (data->path[i])
+	{
+		cmd_path = ft_strjoin(data->path[i], cmd);
+		if (cmd_path == NULL)
+			return (-1);
+		if (access(cmd_path, F_OK) == 0)
+		{
+			current_arg->path = cmd_path;
+			return (1);
+		}
+		i++;
+		free(cmd_path);
+	}
+	return (1);
+}
+
+int	check_cmd(t_data *data, t_parse *current_arg)
+{
+	char	*cmd;
+
+	if (is_path(current_arg->command[0]) == 1)
+	{
+		if (access(current_arg->command[0], F_OK) == 0)
+		{
+			current_arg->path = current_arg->command[0];
+			return (1);
+		}	
+		return (-1);
+	}
+	cmd = ft_strjoin("/", current_arg->command[0]);
+	if (cmd == NULL)
+		return (-1);
+	current_arg->path = current_arg->command[0]; // check si malloc ? 
+	if (find_path(data, current_arg, cmd) == -1)
+		return (-1);
+	free(cmd);
+	return (1);
+}
