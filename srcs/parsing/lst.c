@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 11:19:22 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/06 22:41:58 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_parse	*ft_node_new(char *argv, t_arg_type type)
 	new_node->path = NULL;
 	new_node->fd = -1;
 	new_node->next = NULL;
+	new_node->first_cmd = false;
+	new_node->last_cmd = false;
 	return (new_node);
 }
 

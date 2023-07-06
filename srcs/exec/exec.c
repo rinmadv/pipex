@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 22:21:43 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 00:00:35 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,48 @@
 
 int	execute_child(t_data *data, t_parse *arg)
 {
-	//signal
 	if (data->first_arg->type == infile)
 	{
 		redirect_infile(data, data->first_arg);
 		data->first_arg = data->first_arg->next;
 	}
 	else if (data->first_arg->type == command
-				&& data->first_arg->next->type == outfile)
+		&& data->first_arg->next->type == outfile)
 		redirect_outfile(data, data->first_arg->next);
 	if (!check_cmd(data, arg))
-		exit (126);
-	execve; // à faire 
+		exit (126); // demander pk 126
+	execve; // à faire
+	// besoin d'exit ?
 	return (0); // à changer
 }
-int	execute_parent(t_data *data, t_parse *arg)
+
+int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
-	// signal
-			/* 
-			si on est dans la première commande (index 0)
-				pipe_fd = dup(data->fd[0]);
-				close (data->fd[0]);
-				close (data->fd[1]);
-				check erreur dup
-			sinon si on es dans la derniere commande (index n)
-				close (pipe_fd);
-				close (data->fd[0]);
-				close (data->fd[1]);
-			sinon (milieu)
-				close (pipe_fd);
-				pipe_fd = dup(data->fd[0]);
-				close (data->fd[0]);
-				close (data->fd[1]);
-				check erreur dup
-			*/
+	if (arg->first_cmd == true)
+	{
+		pipe_fd = dup(data->fd[0]);
+		close (data->fd[0]);
+		close (data->fd[1]);
+		if (pipe_fd == -1)
+			return (-1);
+	}
+	else if (arg->last_cmd == true)
+	{
+		close (pipe_fd);
+		close (data->fd[0]);
+		close (data->fd[1]);
+	}
+	else
+	{
+		close (pipe_fd);
+		pipe_fd = dup(data->fd[0]);
+		close (data->fd[0]);
+		close (data->fd[1]);
+		if (pipe_fd == -1)
+			return (-1);
+	}
+	return (0);
 }
-
-
 
 int	exec(t_data *data)
 {
@@ -58,7 +63,7 @@ int	exec(t_data *data)
 	int		pid;
 	int		pipe_fd;
 
-	temp = data->first_arg;
+	temp = data->first_arg; // besoin ou pas
 	while (data->first_arg != NULL && data->first_arg->type != outfile)
 	{
 		if (pipe(data->fd) < 0)
@@ -69,10 +74,11 @@ int	exec(t_data *data)
 		else if (pid == 0)
 			execute_child(data, data->first_arg);
 		else
-			execute_parent(data, data->first_arg);
+			execute_parent(data, data->first_arg, &pipe_fd);
 		data->first_arg = data->first_arg->next;
 	}
-	wait();
-	data->first_arg = temp;
+	while (wait(NULL) != -1)
+	data->first_arg = temp; // besoin ou pas
+	// j'exit ou ?
 	return (0);
 }

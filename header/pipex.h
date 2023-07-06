@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 19:02:40 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/06 22:49:05 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //include 
 # include "libft.h"
+# include <stdbool.h>
 
 //defines
 
@@ -32,7 +33,8 @@ typedef struct s_parse
 	t_arg_type			type;
 	char				*path;
 	int					fd;
-	int					index;
+	bool				first_cmd;
+	bool				last_cmd;
 	struct s_parse		*next;
 }			t_parse;
 
@@ -59,12 +61,13 @@ void	ft_free_2d_array(char **path);
 int		parsing(char **argv, t_parse **argument, int argc, char **envp);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
+void 	check_first_lst_cmd(t_parse *arg);
 
 /* Executuion */
 int		exec(t_data *data);
 
 /* Check files */
-int		check_infile(t_parse *argument);
-int		check_outfile(t_parse *argument);
+void	redirect_infile(t_data *data, t_parse *arg);
+void	redirect_outfile(t_data *data, t_parse *arg);
 
 #endif
