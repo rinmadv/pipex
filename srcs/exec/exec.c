@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/07 12:28:31 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:27:27 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	execute_child(t_data *data, t_parse *arg)
 {
-	printf("Execution enfant %s\n", arg->command[0]);
+	//printf("Execution enfant %s\n", arg->command[0]);
 	if (data->first_arg->type == infile)
 	{
 		redirect_infile(data->first_arg);
@@ -26,13 +26,13 @@ int	execute_child(t_data *data, t_parse *arg)
 	if (!check_cmd(data, arg))
 		exit (126); // demander pk 126
 	execve(arg->path, arg->command, data->path);
-	printf("Fin processus enfant %s\n", arg->command[0]);
+	//printf("Fin processus enfant %s\n", arg->command[0]);
 	return (0); // à changer
 }
 
 int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
-	printf("Execution parent %s\n", arg->command[0]);
+	//printf("Execution parent %s\n", arg->command[0]);
 	if (arg->first_cmd == true)
 	{
 		*pipe_fd = dup(data->fd[0]);
@@ -56,7 +56,7 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 		if (*pipe_fd == -1)
 			return (-1);
 	}
-	printf("Fin processus parent %s\n", data->first_arg->command[0]);
+	//printf("Fin processus parent %s\n", data->first_arg->command[0]);
 	return (0);
 }
 
