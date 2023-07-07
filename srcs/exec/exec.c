@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/07 11:29:06 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 12:28:31 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	execute_child(t_data *data, t_parse *arg)
 {
+	printf("Execution enfant %s\n", arg->command[0]);
 	if (data->first_arg->type == infile)
 	{
 		redirect_infile(data->first_arg);
@@ -24,13 +25,14 @@ int	execute_child(t_data *data, t_parse *arg)
 		redirect_outfile(data->first_arg->next);
 	if (!check_cmd(data, arg))
 		exit (126); // demander pk 126
-	//execve; // à faire
-	// besoin d'exit ?
+	execve(arg->path, arg->command, data->path);
+	printf("Fin processus enfant %s\n", arg->command[0]);
 	return (0); // à changer
 }
 
 int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
+	printf("Execution parent %s\n", arg->command[0]);
 	if (arg->first_cmd == true)
 	{
 		*pipe_fd = dup(data->fd[0]);
@@ -54,16 +56,15 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 		if (*pipe_fd == -1)
 			return (-1);
 	}
+	printf("Fin processus parent %s\n", data->first_arg->command[0]);
 	return (0);
 }
 
 int	exec(t_data *data)
 {
-	t_parse	*temp;
 	int		pid;
 	int		pipe_fd;
 
-	temp = data->first_arg; // besoin ou pas
 	while (data->first_arg != NULL && data->first_arg->type != outfile)
 	{
 		if (pipe(data->fd) < 0)
@@ -71,14 +72,13 @@ int	exec(t_data *data)
 		pid = fork();
 		if (pid == -1)
 			return (-1);
-		else if (pid == 0)
+		if (pid == 0)
 			execute_child(data, data->first_arg);
 		else
 			execute_parent(data, data->first_arg, &pipe_fd);
 		data->first_arg = data->first_arg->next;
 	}
 	while (wait(NULL) != -1)
-	data->first_arg = temp; // besoin ou pas
-	// j'exit ou ?
+	exit (0);
 	return (0);
 }
