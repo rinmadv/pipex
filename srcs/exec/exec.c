@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/07 00:00:35 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:29:06 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	execute_child(t_data *data, t_parse *arg)
 {
 	if (data->first_arg->type == infile)
 	{
-		redirect_infile(data, data->first_arg);
+		redirect_infile(data->first_arg);
 		data->first_arg = data->first_arg->next;
 	}
 	else if (data->first_arg->type == command
 		&& data->first_arg->next->type == outfile)
-		redirect_outfile(data, data->first_arg->next);
+		redirect_outfile(data->first_arg->next);
 	if (!check_cmd(data, arg))
 		exit (126); // demander pk 126
-	execve; // à faire
+	//execve; // à faire
 	// besoin d'exit ?
 	return (0); // à changer
 }
@@ -33,25 +33,25 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
 	if (arg->first_cmd == true)
 	{
-		pipe_fd = dup(data->fd[0]);
+		*pipe_fd = dup(data->fd[0]);
 		close (data->fd[0]);
 		close (data->fd[1]);
-		if (pipe_fd == -1)
+		if (*pipe_fd == -1)
 			return (-1);
 	}
 	else if (arg->last_cmd == true)
 	{
-		close (pipe_fd);
+		close (*pipe_fd);
 		close (data->fd[0]);
 		close (data->fd[1]);
 	}
 	else
 	{
-		close (pipe_fd);
-		pipe_fd = dup(data->fd[0]);
+		close (*pipe_fd);
+		*pipe_fd = dup(data->fd[0]);
 		close (data->fd[0]);
 		close (data->fd[1]);
-		if (pipe_fd == -1)
+		if (*pipe_fd == -1)
 			return (-1);
 	}
 	return (0);
