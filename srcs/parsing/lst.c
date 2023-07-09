@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 22:41:58 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 18:03:27 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_lst(t_parse *node)
 		j = 0;
 		while (node->command[j])
 		{
-			printf("arg [%d][%d] = %s\n", i, j, node->command[j]);
+			printf("arg [%d][%d] = %s\tpremière cmd ? : %d\tdernière cmd ? : %d, \n", i, j, node->command[j], node->first_cmd, node->last_cmd);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 23:29:44 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 18:10:47 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int	parsing(char **argv, t_parse **argument, int argc, char **envp)
 		i++;
 	}
 	return (0);
-	(void) envp;
+	(void) envp; // pk si j'enlève envp ça me change tout alors que je l'utilise même pas dans ma fonction?
 }

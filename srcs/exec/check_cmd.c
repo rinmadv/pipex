@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/06 16:14:23 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/07 19:03:18 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	find_path(t_data *data, t_parse *current_arg, char *cmd)
 int	check_cmd(t_data *data, t_parse *current_arg)
 {
 	char	*cmd;
-
 	if (is_path(current_arg->command[0]) == 1)
 		current_arg->path = current_arg->command[0];
 	else
