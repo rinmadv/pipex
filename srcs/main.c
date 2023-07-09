@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/07 18:06:50 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/09 19:38:16 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv, char **envp)
 	data.first_arg = NULL;
 	if (argc < 5)
 		return (1);
-	if (parsing(argv, &data.first_arg, argc, envp) == -1)
+	if (parsing(argv, &data.first_arg, argc) == -1)
 		return (1);
 	check_first_lst_cmd(data.first_arg);
 	if (parse_envp(&data, envp) == -1)
@@ -31,3 +31,4 @@ int	main(int argc, char **argv, char **envp)
 }
 
 	// print_lst(data.first_arg);
+	// si env est null

@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 18:03:34 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/09 19:36:44 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_parse_clear(t_parse **node);
 void	ft_free_2d_array(char **path);
 
 /* Parsing - autre */
-int		parsing(char **argv, t_parse **argument, int argc, char **envp);
+int		parsing(char **argv, t_parse **argument, int argc);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 void	check_first_lst_cmd(t_parse *arg);
@@ -68,7 +68,7 @@ int		exec(t_data *data);
 int		check_cmd(t_data *data, t_parse *current_arg);
 
 /* Check files */
-void	redirect_infile(t_parse *arg);
-int	redirect_outfile(t_parse *arg);
+void	redirect_infile(t_data *data, t_parse *arg);
+void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd);
 
 #endif
