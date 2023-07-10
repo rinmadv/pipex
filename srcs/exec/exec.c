@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 20:55:24 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 23:10:49 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 		}
 	}
 	else if (arg->type == command && arg->next->type == outfile)
+	{
 		redirect_outfile(data, arg->next, pipe_fd);
+	}
 	else
 	{
 		if (dup2(pipe_fd, STDIN_FILENO) == -1)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 10:43:35 by madavid           #+#    #+#             */
-/*   Updated: 2023/02/08 17:43:40 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/10 23:09:51 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,25 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int			i;
 	int			j;
+	const int	size_s1 = ft_strlen_gnl(s1);
+	const int	size_s2 = ft_strlen_gnl(s2);
 	char		*s_new;
 
 	i = 0;
 	j = 0;
 	if (!s1 || ! s2)
 		return (NULL);
-	s_new = malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1) * sizeof(char));
+	s_new = malloc((size_s1 + size_s2 + 1) * sizeof(char));
 	if (s_new == NULL)
 		return (NULL);
-	while (i < ft_strlen_gnl(s1))
+	while (i < size_s1)
 	{
 		s_new[i] = s1[i];
 		i++;
 	}
-	while (j < ft_strlen_gnl(s2))
+	while (j < size_s2)
 		s_new[i++] = s2[j++];
-	if (ft_strlen_gnl(s1) != 0)
+	if (size_s1 != 0)
 		free(s1);
 	return (s_new[i] = 0, s_new);
 }
@@ -88,7 +90,7 @@ void	cut_and_save(char **to_truncate, char *to_save, int buffer_size)
 	}
 }
 
-char	*ft_get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1] = {0};
 	char		*stash;
@@ -103,13 +105,14 @@ char	*ft_get_next_line(int fd)
 	{
 		stash = ft_strjoin_gnl(stash, buffer);
 		readc = read(fd, buffer, BUFFER_SIZE);
+		if (readc == -1)
+			return (free (stash), NULL);
 		buffer[readc] = 0;
 		if (readc <= 0)
 		{
 			if (*stash)
 				return (stash);
-			else
-				return (free(stash), NULL);
+			return (free(stash), NULL);
 		}
 	}
 	stash = ft_strjoin_gnl(stash, buffer);

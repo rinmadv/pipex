@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 20:48:42 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/11 00:00:47 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd)
 		ft_data_clear(data);	
 		exit (1);
 	}
-	arg->fd = open(arg->command[0], O_WRONLY | O_CREAT | O_TRUNC);
+	printf("heredoc value : %d\n", data->here_doc);
+	if (data->here_doc == -1)
+		arg->fd = open(arg->command[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		arg->fd = open(arg->command[0], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (arg->fd == -1)
 	{
 		printf("Permission denied: %s\n", arg->command[0]);
