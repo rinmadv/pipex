@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/10 16:13:25 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 19:06:22 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ int	parse_envp(t_data *data, char **envp)
 	return (0);
 }
 
-t_arg_type	check_type(int i, int argc, char *argv, t_data *data)
+t_arg_type	check_type(int i, int argc, char *argv)
 {
 	t_arg_type	type;
 
 	if (i == 1)
 	{
 		if (ft_strncmp(argv, "here_doc", 8) == 0)
-		{
 			type = heredoc;
-			data->here_doc = 1;
-		}
 		else
 			type = infile;
 	}
@@ -62,11 +59,16 @@ int	parsing(char **argv, t_parse **argument, int argc, t_data *data)
 {
 	int			i;
 	t_parse		*new;
+	t_arg_type	type;
 
 	i = 1;
 	while (i < argc)
 	{
-		new = ft_node_new(argv[i], check_type(i, argc, argv[i], data));
+		type = check_type(i, argc, argv[i]);
+		if (type == heredoc)
+			i++;
+		data->here_doc = 1;
+		new = ft_node_new(argv[i], type);
 		if (new == NULL)
 			return (ft_parse_clear(argument), -1);
 		ft_node_add_back(argument, new);

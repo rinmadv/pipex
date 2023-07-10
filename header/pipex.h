@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/10 16:15:55 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 19:07:09 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum e_arg_type
 {
 	infile,
 	heredoc,
+	limiter,
 	outfile,
 	command
 }			t_arg_type;
