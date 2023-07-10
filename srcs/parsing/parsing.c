@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 19:34:09 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 00:12:58 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	parse_envp(t_data *data, char **envp)
 	if (!envp)
 	{
 		data->path = NULL;
+		printf("env : %s", data->path[0]);
 		return (0);
 	}
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)

@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/07 19:03:18 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 00:39:35 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ int	find_path(t_data *data, t_parse *current_arg, char *cmd)
 int	check_cmd(t_data *data, t_parse *current_arg)
 {
 	char	*cmd;
-	if (is_path(current_arg->command[0]) == 1)
-		current_arg->path = current_arg->command[0];
+	if (!data->path)
+	{
+		if (is_path(current_arg->command[0]) == 1)
+			current_arg->path = current_arg->command[0];
+		else
+			return (ft_printf(2, "%s: command not found\n", current_arg->path), -1);
+	}
 	else
 	{
 		cmd = ft_strjoin("/", current_arg->command[0]);
@@ -62,7 +67,7 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 			return (-1);
 		current_arg->path = current_arg->command[0];
 		if (find_path(data, current_arg, cmd) == -1)
-			return (-1);
+			return (free(cmd), -1);
 		free(cmd);
 	}
 	if (access(current_arg->path, F_OK) != 0)

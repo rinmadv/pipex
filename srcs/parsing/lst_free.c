@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/05/10 19:03:11 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/10 00:29:35 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,18 @@ void	ft_parse_del_one(t_parse *node)
 	free (node);
 }
 
-void	ft_free_2d_array(char **path)
+void	ft_free_2d_array(char **two_di_array)
 {
 	int	i;
 
 	i = 0;
-	if (path == NULL)
-		return ;
-	while (path[i])
+	while (two_di_array[i])
 	{
-		ft_bzero(path[i], ft_strlen(path[i]));
-		free(path[i]);
+		ft_bzero(two_di_array[i], ft_strlen(two_di_array[i]));
+		free(two_di_array[i]);
 		i++;
 	}
-	free (path);
+	free (two_di_array);
 }
 
 void	ft_parse_clear(t_parse **node)
@@ -55,5 +53,6 @@ void	ft_parse_clear(t_parse **node)
 void	ft_data_clear(t_data *data)
 {
 	ft_parse_clear(&data->first_arg);
-	ft_free_2d_array(data->path);
+	if (data->path != NULL)
+		ft_free_2d_array(data->path);
 }

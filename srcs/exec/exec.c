@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 19:30:30 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/09 20:55:24 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	exec(t_data *data)
 		data->first_arg = data->first_arg->next;
 	}
 	while ((pid = wait(NULL)) >= 0)
-	exit (0);
+	exit (1);
 	return (0);
 }
 
