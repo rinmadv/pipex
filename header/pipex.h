@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/09 19:36:44 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:15:55 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //include 
 # include "libft.h"
 # include <stdbool.h>
+# include <sys/wait.h>
 
 //defines
 
@@ -23,6 +24,7 @@
 typedef enum e_arg_type
 {
 	infile,
+	heredoc,
 	outfile,
 	command
 }			t_arg_type;
@@ -42,6 +44,7 @@ typedef struct s_data
 {
 	char	**path;
 	int		fd[2];
+	int		here_doc;
 	t_parse	*first_arg;
 }			t_data;
 
@@ -58,7 +61,7 @@ void	ft_parse_clear(t_parse **node);
 void	ft_free_2d_array(char **path);
 
 /* Parsing - autre */
-int		parsing(char **argv, t_parse **argument, int argc);
+int		parsing(char **argv, t_parse **argument, int argc, t_data *data);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 void	check_first_lst_cmd(t_parse *arg);
