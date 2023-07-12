@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 10:43:35 by madavid           #+#    #+#             */
-/*   Updated: 2023/07/10 23:09:51 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/12 15:55:32 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	cut_and_save(char **to_truncate, char *to_save, int buffer_size)
 	}
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1] = {0};
 	char		*stash;
