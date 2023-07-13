@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 17:30:48 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 23:31:48 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	parsing(char **argv, t_parse **argument, int argc, t_data *data)
 		if (type == infile && ft_strncmp(argv[i], "here_doc", 8) == 0)
 		{
 			data->here_doc = 1;
-			data->delimiter = argv[i+1];
+			data->delimiter = argv[i + 1];
 			if (heredoc(data->delimiter) != 0)
 				return (ft_parse_clear(argument), -1);
-		}	
+		}
 		new = ft_node_new(argv[i], type, data);
 		if (new == NULL)
 			return (ft_parse_clear(argument), -1);

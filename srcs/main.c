@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 16:50:00 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:16:31 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ int	main(int argc, char **argv, char **envp)
 	check_first_lst_cmd(data.first_arg);
 	if (parse_envp(&data, envp) == -1)
 		return (ft_data_clear(&data), 1);
-	// print_lst(data.first_arg);
 	if (exec(&data) == -1)
-	 	return (ft_data_clear(&data), 1);
+		return (ft_data_clear(&data), 1);
 	ft_data_clear(&data);
 	return (0);
 }

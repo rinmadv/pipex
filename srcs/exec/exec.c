@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/10 23:10:49 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:18:59 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,12 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 	}
 	if (!check_cmd(data, arg))
 	{
-			ft_data_clear(data);
-			exit (1);
+		ft_data_clear(data);
+		exit (1);
 	}
 	execve(arg->path, arg->command, data->path);
 	ft_data_clear(data);
-	{
-			ft_data_clear(data);
-			exit (1);
-	}
+	exit (1);
 }
 
 int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
@@ -72,7 +69,7 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 	}
 	else
 	{
-		close (*pipe_fd);
+		//close (*pipe_fd);
 		*pipe_fd = dup(data->fd[0]);
 		close (data->fd[0]);
 		close (data->fd[1]);
@@ -86,8 +83,10 @@ int	exec(t_data *data)
 {
 	int		pid;
 	int		pipe_fd;
+	t_parse	*tmp;
 
-	while (data->first_arg != NULL && data->first_arg->type != outfile)
+	tmp = data->first_arg;
+	while (tmp != NULL && tmp->type != outfile)
 	{
 		if (pipe(data->fd) < 0)
 			return (-1);
@@ -95,18 +94,20 @@ int	exec(t_data *data)
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
-			execute_child(data, data->first_arg, pipe_fd);
+			execute_child(data, tmp, pipe_fd);
 		else
 		{
-			if (execute_parent(data, data->first_arg, &pipe_fd) == -1)
+			if (execute_parent(data, tmp, &pipe_fd) == -1)
 				return (-1);
 		}
-		if (data->first_arg->type == infile)
-			data->first_arg = data->first_arg->next;
-		data->first_arg = data->first_arg->next;
+		if (tmp->type == infile)
+			tmp = tmp->next;
+		tmp = tmp->next;
 	}
-	while ((pid = wait(NULL)) >= 0)
-	exit (1);
+	pid = wait(NULL);
+	while ((pid) >= 0)
+			pid = wait(NULL);
+	//exit (1);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 17:29:43 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 23:35:47 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_parse	*ft_node_new(char *argv, t_arg_type type, t_data *data)
 	new_node = malloc(sizeof(t_parse));
 	if (new_node == NULL)
 		return (NULL);
-	if (data->here_doc == 1)
+	if (type == infile && data->here_doc == 1)
 		new_node->command = ft_split_space(".goinfre/here_doc");
 	else
 		new_node->command = ft_split_space(argv);
 	if (new_node->command == NULL)
-		return (free (new_node), NULL);
+		return (NULL);
 	new_node->type = type;
 	new_node->path = NULL;
 	new_node->fd = -1;
