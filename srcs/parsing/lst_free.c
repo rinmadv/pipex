@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/10 00:29:35 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:21:45 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,9 @@ void	ft_data_clear(t_data *data)
 	ft_parse_clear(&data->first_arg);
 	if (data->path != NULL)
 		ft_free_2d_array(data->path);
+	if (data->delimiter != NULL)
+		free (data->delimiter);
+	if (data->here_doc > 0)
+		unlink(".goinfre/here_doc");
+	free(data);
 }

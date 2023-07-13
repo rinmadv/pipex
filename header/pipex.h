@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/10 19:07:09 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:31:03 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 typedef enum e_arg_type
 {
 	infile,
-	heredoc,
-	limiter,
 	outfile,
 	command
 }			t_arg_type;
@@ -46,11 +44,12 @@ typedef struct s_data
 	char	**path;
 	int		fd[2];
 	int		here_doc;
+	char	*delimiter;
 	t_parse	*first_arg;
 }			t_data;
 
 /* Parsing - liste chainees arguments */
-t_parse	*ft_node_new(char *argv, t_arg_type type);
+t_parse	*ft_node_new(char *argv, t_arg_type type, t_data *data);
 t_parse	*ft_node_last(t_parse *node);
 void	ft_node_add_back(t_parse **node, t_parse *new);
 void	print_lst(t_parse *node);
@@ -66,6 +65,7 @@ int		parsing(char **argv, t_parse **argument, int argc, t_data *data);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 void	check_first_lst_cmd(t_parse *arg);
+int 	heredoc(char *delimiter);
 
 /* Executuion */
 int		exec(t_data *data);

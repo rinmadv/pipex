@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/11 00:01:55 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:30:48 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,12 @@ int	parse_envp(t_data *data, char **envp)
 	return (0);
 }
 
-t_arg_type	check_type(int i, int argc, char *argv)
+t_arg_type	check_type(int i, int argc)
 {
 	t_arg_type	type;
 
 	if (i == 1)
-	{
-		if (ft_strncmp(argv, "here_doc", 8) == 0)
-			type = heredoc;
-		else
-			type = infile;
-	}
+		type = infile;
 	else if (i == argc - 1)
 		type = outfile;
 	else
@@ -64,16 +59,20 @@ int	parsing(char **argv, t_parse **argument, int argc, t_data *data)
 	i = 1;
 	while (i < argc)
 	{
-		type = check_type(i, argc, argv[i]);
-		if (type == heredoc)
+		type = check_type(i, argc);
+		if (type == infile && ft_strncmp(argv[i], "here_doc", 8) == 0)
 		{
-			i++;
 			data->here_doc = 1;
-		}
-		new = ft_node_new(argv[i], type);
+			data->delimiter = argv[i+1];
+			if (heredoc(data->delimiter) != 0)
+				return (ft_parse_clear(argument), -1);
+		}	
+		new = ft_node_new(argv[i], type, data);
 		if (new == NULL)
 			return (ft_parse_clear(argument), -1);
 		ft_node_add_back(argument, new);
+		if (type == infile && data->here_doc == 1)
+			i++;
 		i++;
 	}
 	return (0);

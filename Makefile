@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    blupmkf                                            :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: marine <marine@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/07/12 15:51:08 by marine           ###   ########.fr        #
+#    Updated: 2023/07/13 16:59:37 by marine           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS_FILES	= main.c \
 			parsing/lst.c \
 			parsing/lst_free.c \
 			parsing/split_space.c \
+			parsing/heredoc.c \
 			exec/exec.c \
 			exec/check_cmd.c \
 			exec/redirection.c

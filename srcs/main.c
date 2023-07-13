@@ -6,7 +6,7 @@
 /*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/12 15:37:19 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:50:00 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int	main(int argc, char **argv, char **envp)
 
 	data.first_arg = NULL;
 	data.here_doc = -1;
+	data.delimiter = NULL;
 	data.path = NULL;
 	if (argc < 5)
 		return (1);
 	if (parsing(argv, &data.first_arg, argc, &data) == -1)
 		return (1);
 	check_first_lst_cmd(data.first_arg);
-	if (data.here_doc == 1)
-		get_here_doc_text()
 	if (parse_envp(&data, envp) == -1)
 		return (ft_data_clear(&data), 1);
 	// print_lst(data.first_arg);
