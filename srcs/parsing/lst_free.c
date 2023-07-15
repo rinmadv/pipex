@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 17:35:05 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 21:11:27 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,4 @@ void	ft_data_clear(t_data *data)
 	ft_parse_clear(&data->first_arg);
 	if (data->path != NULL)
 		ft_free_2d_array(data->path);
-	if (data->delimiter != NULL)
-		free (data->delimiter);
 }

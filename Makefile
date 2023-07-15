@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/07/13 22:53:54 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/15 21:03:09 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ INCLUDE	= -Ilibft -Iheader
 
 CC    = cc
 
-FLAGS  = -Wall -Wextra -Werror -g3 #-fsanitize=address 
+FLAGS  = -Wall -Wextra -Werror -g3
 
 NAME    = pipex
 
