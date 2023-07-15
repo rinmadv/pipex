@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 20:25:06 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 22:09:30 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 {
 	char	*cmd;
 
+	if (!current_arg->command[0])
+		return (ft_printf(2, "pipex: : command not found\n", current_arg->command[0]), -1);
 	if (!data->path)
 	{
 		if (is_path(current_arg->command[0]) == 1)
 			current_arg->path = current_arg->command[0];
 		else
-			return (ft_printf(2, "%s: command not found\n", current_arg->command[0]), -1);
+			return (ft_printf(2, "pipex: %s: command not found\n", current_arg->command[0]), -1);
 	}
 	else
 	{
@@ -72,8 +74,8 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 		free(cmd);
 	}
 	if (access(current_arg->path, F_OK) != 0)
-		return (ft_printf(2, "%s: command not found\n", current_arg->path), -1);
+		return (ft_printf(2, "pipex: %s: command not found\n", current_arg->path), -1);
 	if (access(current_arg->path, X_OK) != 0)
-		return (ft_printf(2, "%s: permission denied\n", current_arg->path), -1);
+		return (ft_printf(2, "pipex: %s: permission denied\n", current_arg->path), -1);
 	return (1);
 }

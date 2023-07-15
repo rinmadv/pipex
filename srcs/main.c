@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 20:52:48 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 21:54:12 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	int i = 1;
-	while (argv[i])
-	{
-		if (!argv[i][0])
-			return (1);
-		i++;
-	}
 	data.first_arg = NULL;
 	data.here_doc = -1;
 	data.delimiter = NULL;
