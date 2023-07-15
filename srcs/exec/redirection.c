@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 22:56:54 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 17:04:27 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd)
 	if (dup2(arg->fd, STDOUT_FILENO) == -1)
 	{
 		close(arg->fd);
+		ft_data_clear(data);
+		exit (1);
+	}
+}
+
+void	redirect_cmd(t_data *data, int pipe_fd)
+{
+	if (dup2(pipe_fd, STDIN_FILENO) == -1)
+	{
+		ft_data_clear(data);
+		exit (1);
+	}
+	if (dup2(data->fd[1], STDOUT_FILENO) == -1)
+	{
 		ft_data_clear(data);
 		exit (1);
 	}

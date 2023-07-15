@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/14 00:18:59 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 17:24:51 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,9 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 		}
 	}
 	else if (arg->type == command && arg->next->type == outfile)
-	{
 		redirect_outfile(data, arg->next, pipe_fd);
-	}
 	else
-	{
-		if (dup2(pipe_fd, STDIN_FILENO) == -1)
-		{
-			ft_data_clear(data);
-			exit (1);
-		}
-		if (dup2(data->fd[1], STDOUT_FILENO) == -1)
-		{
-			ft_data_clear(data);
-			exit (1);
-		}
-	}
+		redirect_cmd(data, pipe_fd);		
 	if (!check_cmd(data, arg))
 	{
 		ft_data_clear(data);
@@ -106,8 +93,7 @@ int	exec(t_data *data)
 	}
 	pid = wait(NULL);
 	while ((pid) >= 0)
-			pid = wait(NULL);
-	//exit (1);
+		pid = wait(NULL);
 	return (0);
 }
 

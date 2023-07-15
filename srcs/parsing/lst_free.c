@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/14 00:11:52 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 17:35:05 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_parse_clear(t_parse **node)
 		p = *node;
 		while (*node)
 		{
-			dprintf(2, "%s\n", (*node)->command[0]);
 			p = (*node)->next;
 			ft_free_2d_array((*node)->command);
 			free (*node);
@@ -54,10 +53,7 @@ void	ft_parse_clear(t_parse **node)
 void	ft_data_clear(t_data *data)
 {
 	if (data->here_doc > 0)
-	{
-		printf("prout\n");
 		unlink(".goinfre/here_doc");
-	}
 	ft_parse_clear(&data->first_arg);
 	if (data->path != NULL)
 		ft_free_2d_array(data->path);

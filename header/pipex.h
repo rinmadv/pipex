@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 23:26:45 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/15 17:04:36 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int		check_cmd(t_data *data, t_parse *current_arg);
 /* Check files */
 void	redirect_infile(t_data *data, t_parse *arg);
 void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd);
+void	redirect_cmd(t_data *data, int pipe_fd);
 
 #endif
