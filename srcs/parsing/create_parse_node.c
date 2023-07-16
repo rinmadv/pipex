@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst.c                                              :+:      :+:    :+:   */
+/*   create_parse_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 01:59:28 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 03:13:22 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_parse	*ft_node_new(char *argv, t_arg_type type, t_data *data)
 	if (new_node == NULL)
 		return (NULL);
 	if (type == infile && data->here_doc == 1)
-		new_node->command = ft_split_space(".goinfre/here_doc");
+		new_node->command = ft_split_space(".here_doc");
 	else
 		new_node->command = ft_split_space(argv);
 	if (new_node->command == NULL)

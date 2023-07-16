@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 02:03:59 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 02:40:21 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	redirect_infile(t_data *data, t_parse *arg)
 		redirection_error(NOFILEDIR, "", data);
 	arg->fd = access(arg->command[0], F_OK);
 	if (arg->fd == -1)
+	{
+		close(data->fd[1]);
 		redirection_error(NOFILEDIR, arg->command[0], data);
+	}
 	arg->fd = open(arg->command[0], O_RDONLY);
 	if (arg->fd == -1)
 		redirection_error(PERM, arg->command[0], data);
@@ -29,10 +32,12 @@ void	redirect_infile(t_data *data, t_parse *arg)
 		ft_data_clear(data);
 		exit (1);
 	}
+	close(arg->fd);
 }
 
 void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd)
 {
+	(void)pipe_fd;
 	close(data->fd[0]);
 	close(data->fd[1]);
 	if (dup2(pipe_fd, STDIN_FILENO) == -1)
@@ -54,6 +59,7 @@ void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd)
 		ft_data_clear(data);
 		exit (1);
 	}
+	close(arg->fd);
 }
 
 void	redirect_cmd(t_data *data, int pipe_fd)

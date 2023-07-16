@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/13 23:31:48 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 04:04:16 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	check_first_lst_cmd(t_parse *arg)
 {
 	arg = arg->next;
+	//dprintf(2, "premiere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	arg->first_cmd = true;
+	//dprintf(2, "premiere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	while (arg->next->type != outfile)
 		arg = arg->next;
+	//dprintf(2, "derniere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	arg->last_cmd = true;
+	//dprintf(2, "derniere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 }
 
 int	parse_envp(t_data *data, char **envp)
@@ -31,9 +35,11 @@ int	parse_envp(t_data *data, char **envp)
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
 		i++;
 	if (envp[i])
+	{
 		data->path = ft_split(&envp[i][5], ':');
-	if (data->path == NULL)
-		return (-1);
+		if (data->path == NULL)
+			return (-1);
+	}
 	return (0);
 }
 

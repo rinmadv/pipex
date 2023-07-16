@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 01:34:31 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 04:21:34 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 		redirect_outfile(data, arg->next, pipe_fd);
 	else
 		redirect_cmd(data, pipe_fd);
+	close(data->fd[1]);
 	if (check_cmd(data, arg) < 0)
 	{
 		ft_data_clear(data);
@@ -42,7 +43,7 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
 	if (arg->first_cmd == true)
 	{
-		*pipe_fd = dup(data->fd[0]);
+		*pipe_fd = data->fd[0];
 		close (data->fd[0]);
 		close (data->fd[1]);
 		if (*pipe_fd == -1)
@@ -56,7 +57,7 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 	}
 	else
 	{
-		*pipe_fd = dup(data->fd[0]);
+		*pipe_fd = data->fd[0];
 		close (data->fd[0]);
 		close (data->fd[1]);
 		if (*pipe_fd == -1)
@@ -68,7 +69,7 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 int	exec(t_data *data)
 {
 	int		pid;
-	int		pipe_fd;
+	int		pipe_fd = -1;
 	t_parse	*tmp;
 
 	tmp = data->first_arg;
