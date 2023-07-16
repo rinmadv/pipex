@@ -1,5 +1,6 @@
 Makefile
 README.md
+badoutfile.txt
 header
 infile.txt
 libft
@@ -7,4 +8,6 @@ lol
 note.txt
 outfile.txt
 pipex
+plpl.txt
+somewhat
 srcs

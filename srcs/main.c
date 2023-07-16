@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 04:03:04 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 19:27:51 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	check_first_lst_cmd(data.first_arg);
 	// while(data.first_arg)
 	// {
-	// 	dprintf(2, "cmd : %s, first arg : %d, last arg : %d\n", data.first_arg->command[0], data.first_arg->first_cmd, data.first_arg->last_cmd);
+	// 	dprintf(2, "cmd : %s, first arg : %d, last arg : [%d]\n", data.first_arg->command[0], data.first_arg->first_cmd, data.first_arg->last_cmd);
 	// 	data.first_arg = data.first_arg->next;
 	// }
 	if (parse_envp(&data, envp) == -1)

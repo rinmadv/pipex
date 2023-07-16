@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 02:40:21 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 21:24:46 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	redirect_infile(t_data *data, t_parse *arg)
 	close(data->fd[0]);
 	if (!arg->command[0])
 		redirection_error(NOFILEDIR, "", data);
-	arg->fd = access(arg->command[0], F_OK);
-	if (arg->fd == -1)
+	if (access(arg->command[0], F_OK) == -1)
 	{
 		close(data->fd[1]);
 		redirection_error(NOFILEDIR, arg->command[0], data);
@@ -45,6 +44,7 @@ void	redirect_outfile(t_data *data, t_parse *arg, int pipe_fd)
 		ft_data_clear(data);
 		exit (1);
 	}
+	close(pipe_fd);
 	if (!arg->command[0])
 		redirection_error(NOFILEDIR, "", data);
 	if (data->here_doc == -1)
@@ -74,4 +74,6 @@ void	redirect_cmd(t_data *data, int pipe_fd)
 		ft_data_clear(data);
 		exit (1);
 	}
+	close(pipe_fd);
+	close(data->fd[0]);
 }

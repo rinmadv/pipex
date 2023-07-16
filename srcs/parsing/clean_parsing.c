@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:57:48 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 03:11:47 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 21:47:47 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_parse_clear(t_parse **node)
 
 	if (node)
 	{
-		p = *node;
 		while (*node)
 		{
 			p = (*node)->next;

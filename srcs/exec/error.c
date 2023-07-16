@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 02:03:25 by madavid           #+#    #+#             */
-/*   Updated: 2023/07/16 02:08:23 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 19:08:08 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_err(int type, char *cmd)
 	else if (type == PERM)
 		ft_printf(2, "pipex: %s: permission denied\n", cmd);
 	else
-		printf("pipex: %s: No such file or directory\n", cmd);
+		ft_printf(2, "pipex: %s: No such file or directory\n", cmd);
 	return (-1);
 }
 
