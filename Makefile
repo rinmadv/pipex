@@ -6,14 +6,14 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/07/16 02:04:30 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/16 02:07:28 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_FILES	= main.c \
 			parsing/parsing.c \
-			parsing/lst.c \
-			parsing/lst_free.c \
+			parsing/create_parse_node.c \
+			parsing/clean_parsing.c \
 			parsing/split_space.c \
 			parsing/heredoc.c \
 			exec/exec.c \
