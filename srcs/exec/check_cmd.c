@@ -6,13 +6,12 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 22:09:30 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 01:56:14 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// faire attention aux -1
 int	is_path(char *current_arg)
 {
 	int	i;
@@ -50,18 +49,27 @@ int	find_path(t_data *data, t_parse *current_arg, char *cmd)
 	return (1);
 }
 
+int	check_access(char *path)
+{
+	if (access(path, F_OK) != 0)
+		return (print_err(CMD, path));
+	if (access(path, X_OK) != 0)
+		return (print_err(PERM, path));
+	return (0);
+}
+
 int	check_cmd(t_data *data, t_parse *current_arg)
 {
 	char	*cmd;
 
 	if (!current_arg->command[0])
-		return (ft_printf(2, "pipex: : command not found\n", current_arg->command[0]), -1);
+		return (print_err(CMD, ""));
 	if (!data->path)
 	{
 		if (is_path(current_arg->command[0]) == 1)
 			current_arg->path = current_arg->command[0];
 		else
-			return (ft_printf(2, "pipex: %s: command not found\n", current_arg->command[0]), -1);
+			return (print_err(CMD, current_arg->command[0]));
 	}
 	else
 	{
@@ -73,9 +81,7 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 			return (free(cmd), -1);
 		free(cmd);
 	}
-	if (access(current_arg->path, F_OK) != 0)
-		return (ft_printf(2, "pipex: %s: command not found\n", current_arg->path), -1);
-	if (access(current_arg->path, X_OK) != 0)
-		return (ft_printf(2, "pipex: %s: permission denied\n", current_arg->path), -1);
+	if (check_access(current_arg->path) != 0)
+		return (-1);
 	return (1);
 }

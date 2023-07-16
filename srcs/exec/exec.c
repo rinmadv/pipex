@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 17:24:51 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 01:34:31 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 	else if (arg->type == command && arg->next->type == outfile)
 		redirect_outfile(data, arg->next, pipe_fd);
 	else
-		redirect_cmd(data, pipe_fd);		
-	if (!check_cmd(data, arg))
+		redirect_cmd(data, pipe_fd);
+	if (check_cmd(data, arg) < 0)
 	{
 		ft_data_clear(data);
 		exit (1);
@@ -56,7 +56,6 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 	}
 	else
 	{
-		//close (*pipe_fd);
 		*pipe_fd = dup(data->fd[0]);
 		close (data->fd[0]);
 		close (data->fd[1]);
@@ -83,10 +82,8 @@ int	exec(t_data *data)
 		if (pid == 0)
 			execute_child(data, tmp, pipe_fd);
 		else
-		{
 			if (execute_parent(data, tmp, &pipe_fd) == -1)
 				return (-1);
-		}
 		if (tmp->type == infile)
 			tmp = tmp->next;
 		tmp = tmp->next;
@@ -96,5 +93,3 @@ int	exec(t_data *data)
 		pid = wait(NULL);
 	return (0);
 }
-
-// fermer les fd à fermer

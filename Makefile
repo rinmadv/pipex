@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/07/15 21:03:09 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/16 02:04:30 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS_FILES	= main.c \
 			parsing/heredoc.c \
 			exec/exec.c \
 			exec/check_cmd.c \
-			exec/redirection.c
+			exec/redirection.c \
+			exec/error.c
 
 PREFIX	= srcs
 

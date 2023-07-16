@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:30:55 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 17:04:36 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 02:01:19 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include <sys/wait.h>
 
 //defines
-
+# define CMD 1
+# define PERM 2
+# define NOFILEDIR 3
 //typedefs
 typedef enum e_arg_type
 {
@@ -48,6 +50,9 @@ typedef struct s_data
 	t_parse	*first_arg;
 }			t_data;
 
+/* Clean */
+int		print_err(int type, char *cmd);
+
 /* Parsing - liste chainees arguments */
 t_parse	*ft_node_new(char *argv, t_arg_type type, t_data *data);
 t_parse	*ft_node_last(t_parse *node);
@@ -65,7 +70,7 @@ int		parsing(char **argv, t_parse **argument, int argc, t_data *data);
 int		parse_envp(t_data *data, char **envp);
 char	**ft_split_space(char const *str);
 void	check_first_lst_cmd(t_parse *arg);
-int 	heredoc(char *delimiter);
+int		heredoc(char *delimiter);
 
 /* Executuion */
 int		exec(t_data *data);

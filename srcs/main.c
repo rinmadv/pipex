@@ -6,20 +6,25 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/15 21:54:12 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 02:03:07 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	init_data(t_data *data)
+{
+	data->first_arg = NULL;
+	data->here_doc = -1;
+	data->delimiter = NULL;
+	data->path = NULL;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	data.first_arg = NULL;
-	data.here_doc = -1;
-	data.delimiter = NULL;
-	data.path = NULL;
+	init_data(&data);
 	if (argc < 5)
 		return (1);
 	if (parsing(argv, &data.first_arg, argc, &data) == -1)
