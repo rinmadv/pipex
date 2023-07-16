@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 19:32:48 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/16 22:05:12 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 {
 	if (arg->first_cmd == true)
 	{
-		dprintf(2, "this is pipe_fd in === [%d]\n", *pipe_fd);
 		if (*pipe_fd != -1)
 			close(*pipe_fd);
 		*pipe_fd = dup(data->fd[0]);
@@ -54,14 +53,12 @@ int	execute_parent(t_data *data, t_parse *arg, int *pipe_fd)
 	}
 	else if (arg->last_cmd == true)
 	{
-		dprintf(2, "here\n");
 		close (*pipe_fd);
 		close (data->fd[0]);
 		close (data->fd[1]);
 	}
 	else
 	{
-		dprintf(2, "this is pipe_fd in else === [%d]\n", *pipe_fd);
 		if (*pipe_fd != -1)
 			close(*pipe_fd);
 		*pipe_fd = dup(data->fd[0]);
