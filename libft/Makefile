@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:49:59 by madavid           #+#    #+#              #
-#    Updated: 2023/05/09 15:19:09 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/17 15:28:57 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ SRCS = ft_bzero.c \
 	ft_lstmap.c \
 	ft_get_next_line.c \
 	ft_printf_fd.c \
-    ft_printf_utils_fd.c \
+	ft_printf_utils_fd.c \
+	ft_printf_fd_new.c \
+	ft_printf_utils_fd_new.c \
 
 OBJS = $(SRCS:.c=.o) 
 
