@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_fd _new.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
+/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 03:11:21 by marine            #+#    #+#             */
-/*   Updated: 2023/07/18 17:42:30 by marine           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:02:35 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,20 +207,27 @@ int	ft_count(const char *str, va_list ap)
 	{
 		if (str[i] != '%')
 		{
+			printf("str[i] : %c dans boucle normale\n", str[i]);
 			i++;
 			n++;
 		}
 		else
 		{
+			printf("str[i] : %c dans boucle speciale\n", str[i]);
 			if (str[i] == '%' && str[i + 1] == '%')
 			{	
+				printf("boucle %%\n");
 				i += 2;
 				n++;
 			}
 			else
+			{
+				printf("boucle comptage\n");	
 				ft_count_arg_len(str[i + 1], ap, &n);
+			}
 			i += 2;
 		}
+		printf("n : %d\n", n);
 	}
 	return (n);
 }
@@ -295,8 +302,8 @@ int	ft_printf(int output, const char *str, ...)
 	n = 0;
 	(void) i;
 	va_start(ap, str);
-	printf("size of buffer : %d\n", n);
 	n = ft_count(str, ap);
+	printf("size of buffer : %d\n", n);
 	va_end(ap);
 	buffer = malloc(sizeof(char) * (n + 1));
 	if (buffer == NULL)
@@ -326,7 +333,7 @@ int	main(void)
 	// printf("ft_printf\t%d\n", ft_printf(1, "|Coucou %c comment ça va %c hihi %c|\n", 'd', 'r','e'));
 	// printf("printf\t\t%d\n", printf("|Coucou %c comment ça va %c hihi %c|\n", 'd', 'r', 'e'));
 	// printf("\n");
-	char *str = NULL;
+	//char *str = NULL;
 
 
 	// printf("test %%s\n");
@@ -335,11 +342,11 @@ int	main(void)
 	// //printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
 	// printf("\n");
 	
-	// printf("test multiple\n");
-	printf("ft_printf : |%d|", ft_printf(1, "Coucou %c %s hihi %c %s grrr %s\n", 'x', str, 't', "bieng ou bieng", "grrr ntm"));
-	//printf("printf : |%d|", printf("Coucou %c %s hihi %c %s grrr %s\n", 'x', str, 't', "bieng ou bieng", "grrr ntm"));
-	// //printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
-	// printf("\n");
+	printf("test multiple\n");
+	printf("ft_printf : |%d|", ft_printf(1, "Coucou %s %c hihi %c grrr \n", "coucou", 'x', 't'));
+	printf("printf : |%d|", printf("Coucou %s %c hihi %c grrr \n", "coucou", 'x', 't'));
+	//printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
+	printf("\n");
 
 	// printf("test %%d\n");
 	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %d \n", 1024));
