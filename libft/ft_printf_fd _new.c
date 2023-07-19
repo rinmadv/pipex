@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_fd _new.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marine <marine@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 03:11:21 by marine            #+#    #+#             */
-/*   Updated: 2023/07/17 21:39:35 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/18 17:42:30 by marine           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
 
 void	ft_putstr_pf(int output, char *str, int *n)
 {
@@ -32,7 +33,8 @@ void	ft_addstr(char *buffer, char *str, int *n)
 	char *null_str;
 	
 	i = 0;
-	if (!str)
+	//printf("coucou str : %d\n", str ? 1 : 0);
+	if (!str || !str[i])
 	{
 		null_str = "(null)";
 		while (null_str[i])
@@ -43,12 +45,14 @@ void	ft_addstr(char *buffer, char *str, int *n)
 		}
 	}
 	else
+	{
 		while (str[i])
 		{
 			buffer[*n] = str[i];
 			*n += 1;
 			i++;
 		}
+	}
 }
 
 // void	ft_putnbr_pf(char *buffer, long long int nb, int *n, int is_unsigned)
@@ -291,14 +295,17 @@ int	ft_printf(int output, const char *str, ...)
 	n = 0;
 	(void) i;
 	va_start(ap, str);
+	printf("size of buffer : %d\n", n);
 	n = ft_count(str, ap);
+	va_end(ap);
 	buffer = malloc(sizeof(char) * (n + 1));
 	if (buffer == NULL)
 		return (-1);
-	fill_buffer(buffer, &n, str, ap);
-	n = 0;
-	ft_putstr_pf(output, buffer, &n);
+	va_start(ap, str);
+	//fill_buffer(buffer, &n, str, ap);
 	va_end(ap);
+	n = 0;
+	//ft_putstr_pf(output, buffer, &n);
 	return (n);
 }
 
@@ -309,24 +316,31 @@ int	main(void)
 	// ft_printf(1, "Coucou\n");
 
 	/*test longueur*/
-	// int b = 12;
-	printf("test normal\n");
-	printf("ft_printf\t%d\n", ft_printf(1, "Coucou\n"));
-	printf("printf\t%d\n", printf("Coucou\n"));
-	printf("\n");
-	
-	printf("test %%c\n");
-	printf("ft_printf\t%d\n", ft_printf(1, "Coucou %c \n", 'd'));
-	printf("printf\t%d\n", printf("Coucou %c \n", 'd'));
-	printf("\n");
-	
-
-	// printf("test %%s\n");
-	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %s \n", "wesh alors"));
-	// printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
+	//int b = 12;
+	// printf("test normal\n");
+	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou\n"));
+	// printf("printf\t\t%d\n", printf("Coucou\n"));
 	// printf("\n");
 	
+	// printf("test %%c\n");
+	// printf("ft_printf\t%d\n", ft_printf(1, "|Coucou %c comment ça va %c hihi %c|\n", 'd', 'r','e'));
+	// printf("printf\t\t%d\n", printf("|Coucou %c comment ça va %c hihi %c|\n", 'd', 'r', 'e'));
+	// printf("\n");
+	char *str = NULL;
+
+
+	// printf("test %%s\n");
+	// printf("ft_printf : |%d|", ft_printf(1, "Coucou %s hihi %s grrr %s\n", str, "bieng ou bieng", "grrr ntm"));
+	// printf("printf : |%d|", printf("Coucou %s hihi %s grrr %s\n", str, "bieng ou bieng", "grrr ntm"));
+	// //printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
+	// printf("\n");
 	
+	// printf("test multiple\n");
+	printf("ft_printf : |%d|", ft_printf(1, "Coucou %c %s hihi %c %s grrr %s\n", 'x', str, 't', "bieng ou bieng", "grrr ntm"));
+	//printf("printf : |%d|", printf("Coucou %c %s hihi %c %s grrr %s\n", 'x', str, 't', "bieng ou bieng", "grrr ntm"));
+	// //printf("printf\t%d\n", printf("Coucou %s \n", "wesh alors"));
+	// printf("\n");
+
 	// printf("test %%d\n");
 	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %d \n", 1024));
 	// printf("printf\t%d\n", printf("Coucou %d \n", 1024));
