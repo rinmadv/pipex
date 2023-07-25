@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:49:59 by madavid           #+#    #+#              #
-#    Updated: 2023/07/25 18:18:42 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/25 20:30:38 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS = ft_bzero.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
+	ft_litoa.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \

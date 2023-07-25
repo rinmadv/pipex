@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 03:11:21 by marine            #+#    #+#             */
-/*   Updated: 2023/07/25 19:23:41 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/25 20:34:53 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,20 @@ void	ft_addstr(char *buffer, char *str, int *n)
 	}
 }
 
-int	ft_addnbr_pf(char *buffer, long long int nb, int *n, int is_unsigned)
+int	ft_add_signed_nb(char *buffer, long long int nb, int *n, int is_unsigned)
 {
 	int		i;
 	char	*number;
 
+	printf("nb grrr: %lld\n", nb);
 	if (!is_unsigned && *n < 0)
 	{
 		buffer[*n++] = '-';
 		nb *= -1;
 	}
 	i = 0;
-	number = ft_itoa(nb);
+	number = ft_litoa(nb);
+	printf("nb gttt: %s\n", number);
 	if (number == NULL)
 		return (-1);
 	while (number[i])
@@ -134,9 +136,9 @@ void	ft_args(char c, va_list ap, int *n, char *buffer)
 	// else if (c == 'p')
 	// 	ft_putptr_pf(buffer, va_arg(ap, unsigned long int), n);
 	else if (c == 'd' || c == 'i')
-		ft_addnbr_pf(buffer, va_arg(ap, int), n, 0);
-	// else if (c == 'u')
-	// 	ft_putnbr_pf(buffer, va_arg(ap, unsigned int), n, 1);
+		ft_add_signed_nb(buffer, va_arg(ap, int), n, 0);
+	else if (c == 'u')
+		ft_add_signed_nb(buffer, va_arg(ap, unsigned int), n, 1);
 	// else if (c == 'x')
 	// 	ft_puthexa_pf(buffer, va_arg(ap, unsigned int), n, 0);
 	// else if (c == 'X')
@@ -187,16 +189,28 @@ int	ft_count_ptr(unsigned long int ptr)
 	return (2 + ft_counthexa(ptr));
 }
 
-int	ft_countnbr(long long int nb, int is_unsigned)
+int	ft_count_signed_int(long long int nb)
 {
 	int	count;
 
 	count = 1;
-	if (!is_unsigned && nb < 0)
+	if (nb < 0)
 	{
 		count++;
 		nb *= -1;
 	}
+	while (nb > 9)
+	{
+		count++;
+		nb = nb / 10;
+	}
+	return (count);
+}
+
+int	ft_count_unsigned_int(long long unsigned int nb)
+{
+	int	count;
+
 	while (nb > 9)
 	{
 		count++;
@@ -217,9 +231,12 @@ void	ft_count_arg_len(char c, va_list ap, int *n)
 	else if (c == 'p')
 		*n = *n + (ft_count_ptr(va_arg(ap, unsigned long int)));
 	else if (c == 'd' || c == 'i')
-		*n = *n + (ft_countnbr(va_arg(ap, int), 0));
+	{
+		// ajouter secu int min et max
+		*n = *n + (ft_count_signed_int(va_arg(ap, int)));
+	}
 	else if (c == 'u')
-		*n = *n + (ft_countnbr(va_arg(ap, unsigned int), 1));
+		*n = *n + (ft_count_unsigned_int(va_arg(ap, unsigned int)));
 	else if (c == 'x' || c == 'X')
 		*n = *n + (ft_counthexa(va_arg(ap, unsigned int)));
 	return ;
@@ -390,10 +407,10 @@ int	main(void)
 	
 /* ici */
 
-	// printf("test %%u\n");
-	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %u \n", -1024));
-	// printf("printf\t%d\n", printf("Coucou %u \n", -1024));
-	// printf("\n");
+	printf("test %%u\n");
+	printf("ft_printf\t%d\n", ft_printf(1, "Coucou %u \n", -3));
+	//printf("printf\t%d\n", printf("Coucou %u \n", -1));
+	printf("\n");
 	
 
 	// printf("test %%x\n");

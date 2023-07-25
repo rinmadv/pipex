@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_litoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:32:52 by marine            #+#    #+#             */
-/*   Updated: 2023/07/25 20:31:33 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/25 20:34:09 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,21 @@ static int	absolute(int n)
 	return (n);
 }
 
-char	*ft_itoa(int n)
+char	*ft_litoa(unsigned int n)
 {
 	int		i;
 	char	*number;
 	int		j;
-	int		neg;
 
-	neg = 0;
-	if (n < 0)
-		neg = 1;
 	i = 0;
 	j = ft_nblen(n) - 1;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	number = ft_calloc((ft_nblen(n) + 1 + neg), sizeof(char));
+	printf("litoa n = %u\n", n);
+	number = ft_calloc((ft_nblen(n) + 1), sizeof(char));
 	if (number == NULL)
 		return (NULL);
 	if (n == 0)
 		number[i] = '0';
-	if (n < 0)
-		number[i++] = '-';
-	while (j + neg >= neg)
+	while (j>= 0)
 	{
 		number[i] = (absolute(n) / ft_powten(j)) + 48;
 		n = absolute(n) - (ft_powten(j--) * (number[i++] - 48));
