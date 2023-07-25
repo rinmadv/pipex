@@ -6,19 +6,19 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 03:11:21 by marine            #+#    #+#             */
-/*   Updated: 2023/07/25 19:13:14 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/25 19:23:41 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*attention a verifier si meme nb dargs que de va*/
+/*attention a verifier si meme nb d'args que de va*/
+/*pour les i et les d, verfifier que cest pas un long*/
 
-# include <stdio.h>
-# include <stdarg.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include "libft.h"
-
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include "libft.h"
 
 void	ft_putstr_pf(int output, char *str, int *n)
 {
@@ -32,9 +32,9 @@ void	ft_putstr_pf(int output, char *str, int *n)
 
 void	ft_addstr(char *buffer, char *str, int *n)
 {
-	int	i;
-	char *null_str;
-	
+	int		i;
+	char	*null_str;
+
 	i = 0;
 	//printf("coucou str : %d\n", str ? 1 : 0);
 	if (!str || !str[i])
@@ -57,10 +57,11 @@ void	ft_addstr(char *buffer, char *str, int *n)
 		}
 	}
 }
+
 int	ft_addnbr_pf(char *buffer, long long int nb, int *n, int is_unsigned)
 {
 	int		i;
-	char *number;
+	char	*number;
 
 	if (!is_unsigned && *n < 0)
 	{
@@ -183,10 +184,10 @@ int	ft_count_ptr(unsigned long int ptr)
 {
 	if (ptr == 0)
 		return (5);
-	return(2 + ft_counthexa(ptr));
+	return (2 + ft_counthexa(ptr));
 }
 
-int	ft_countnbr(long long int nb,int is_unsigned)
+int	ft_countnbr(long long int nb, int is_unsigned)
 {
 	int	count;
 
@@ -280,10 +281,10 @@ void	ft_bzero_pf(char *s, int n)
 
 void	fill_buffer(char *buffer, int *n, const char *str, va_list ap)
 {
-	ft_bzero_pf(buffer, *n + 1);
-	int i;
-	
+	int	i;
+
 	i = 0; // naviguer dans la chaine
+	ft_bzero_pf(buffer, *n + 1);
 	*n = 0; // naviguer dans mon buffer
 	while (str[i])
 	{
@@ -376,18 +377,18 @@ int	main(void)
 	// printf("printf\t%d\n", printf("Coucou |%d| |%d| |%d|\n", 1024, 0, -1));
 	// printf("\n");
 	
-/* ici */
 	
-	printf("test multiple\n");
-	printf("ft_printf : |%d|", ft_printf(1, "Coucou |%s| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou",  'x', 't', "ntm", -605874, -7));
-	printf("printf : |%d|", printf("Coucou |%s| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou",  'x', 't', "ntm", -605874, -7));
-	printf("\n");
+	// printf("test multiple\n");
+	// printf("ft_printf : |%d|", ft_printf(1, "Coucou |%s| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou",  'x', 't', "ntm", -605874, -7));
+	// printf("printf : |%d|", printf("Coucou |%s| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou",  'x', 't', "ntm", -605874, -7));
+	// printf("\n");
 
 	// printf("test %%i\n");
-	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %i \n", 1024));
-	// printf("printf\t%d\n", printf("Coucou %i \n", 1024));
+	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %i, %d, %d, %d, %i \n", 1024, -12, 1000, 24, 0));
+	// printf("printf\t%d\n", printf("Coucou %i, %d, %d, %d, %i \n", 1024, -12, 1000, 24, 0));
 	// printf("\n");
 	
+/* ici */
 
 	// printf("test %%u\n");
 	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %u \n", -1024));
