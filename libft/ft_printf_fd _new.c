@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 03:11:21 by marine            #+#    #+#             */
-/*   Updated: 2023/07/25 20:34:53 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/26 15:57:02 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,18 @@ void	ft_addstr(char *buffer, char *str, int *n)
 	}
 }
 
-int	ft_add_signed_nb(char *buffer, long long int nb, int *n, int is_unsigned)
+int	ft_add_signed_nb(char *buffer, long long int nb, int *n)
 {
 	int		i;
 	char	*number;
 
-	printf("nb grrr: %lld\n", nb);
-	if (!is_unsigned && *n < 0)
+	if (*n < 0)
 	{
 		buffer[*n++] = '-';
 		nb *= -1;
 	}
 	i = 0;
-	number = ft_litoa(nb);
-	printf("nb gttt: %s\n", number);
+	number = ft_itoa(nb);
 	if (number == NULL)
 		return (-1);
 	while (number[i])
@@ -83,6 +81,31 @@ int	ft_add_signed_nb(char *buffer, long long int nb, int *n, int is_unsigned)
 	return (0);
 }
 
+int	ft_add_unsigned_nb(char *buffer, unsigned int nb, int *n)
+{
+	int		i;
+	char	*number;
+
+	i = 0;
+	number = ft_uitoa(nb);
+	if (number == NULL)
+		return (-1);
+	while (number[i])
+	{
+		buffer[*n] = number[i++];
+		*n += 1;
+	}
+	free(number);
+	return (0);
+}
+
+void	ft_addhexa(char *buffer, unsigned long long int nb, int *n, int c)
+{
+	(void) buffer;
+	(void) n;
+	char *hexa = ft_uitoa_hexa(nb, c);
+	printf("hexa : %s\n", hexa);
+}
 // void	ft_putnbr_pf(char *buffer, long long int nb, int *n, int is_unsigned)
 // {
 // 	if (!is_unsigned && nb < 0)
@@ -101,25 +124,6 @@ int	ft_add_signed_nb(char *buffer, long long int nb, int *n, int is_unsigned)
 // 	}
 // }
 
-// void	ft_puthexa(char *buffer, unsigned long long int nb, int *n, int c)
-// {
-// 	char	*base;
-
-// 	if (c == 0)
-// 		base = "0123456789abcdef";
-// 	else
-// 		base = "0123456789ABCDEF";
-// 	if (nb <= 15)
-// 	{	
-// 		buffer[*n] = (base[0 + nb]);
-// 		n += 1;
-// 	}
-// 	if (nb > 15)
-// 	{
-// 		ft_puthexa_pf(output, nb / 16, n, c);
-// 		ft_putchar_pf(output, (base[0 + nb % 16]), n);
-// 	}
-// }
 
 // void	ft_putptr_pf(char *buffer, unsigned long int ptr, int *n)
 // {
@@ -136,13 +140,13 @@ void	ft_args(char c, va_list ap, int *n, char *buffer)
 	// else if (c == 'p')
 	// 	ft_putptr_pf(buffer, va_arg(ap, unsigned long int), n);
 	else if (c == 'd' || c == 'i')
-		ft_add_signed_nb(buffer, va_arg(ap, int), n, 0);
+		ft_add_signed_nb(buffer, va_arg(ap, int), n);
 	else if (c == 'u')
-		ft_add_signed_nb(buffer, va_arg(ap, unsigned int), n, 1);
-	// else if (c == 'x')
-	// 	ft_puthexa_pf(buffer, va_arg(ap, unsigned int), n, 0);
-	// else if (c == 'X')
-	// 	ft_puthexa_pf(buffer, va_arg(ap, unsigned int), n, 1);
+		ft_add_unsigned_nb(buffer, va_arg(ap, unsigned int), n);
+	else if (c == 'x')
+		ft_addhexa(buffer, va_arg(ap, unsigned int), n, 0);
+	else if (c == 'X')
+		ft_addhexa(buffer, va_arg(ap, unsigned int), n, 1);
 	return ;
 }
 // compter la taille 
@@ -349,7 +353,7 @@ int	ft_printf(int output, const char *str, ...)
 	(void) i;
 	va_start(ap, str);
 	n = ft_count(str, ap);
-	printf("size of buffer : %d\n", n);
+	//printf("size of buffer : %d\n", n);
 	va_end(ap);
 	buffer = malloc(sizeof(char) * (n + 1));
 	if (buffer == NULL)
@@ -405,18 +409,24 @@ int	main(void)
 	// printf("printf\t%d\n", printf("Coucou %i, %d, %d, %d, %i \n", 1024, -12, 1000, 24, 0));
 	// printf("\n");
 	
+
+	// printf("test %%u\n");
+	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %u, %d, %d, %u \n", -3, 6, 0, 50));
+	// printf("printf\t%d\n", printf("Coucou %u, %d, %d, %u \n", -3, 6, 0, 50));
+	// printf("\n");
+
+	// printf("test multiple\n");
+	// printf("ft_printf : |%d|", ft_printf(1, "Coucou |%s| |%u| |%d| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou", -10, -10,  'x', 't', "ntm", -605874, -7));
+	// printf("printf : |%d|", printf("Coucou |%s| |%u| |%d| |%c| hihi |%c| |%s| |%d| grrr |%d|\n", "coucou", -10, -10,  'x', 't', "ntm", -605874, -7));
+	// printf("\n");
+
+
 /* ici */
 
-	printf("test %%u\n");
-	printf("ft_printf\t%d\n", ft_printf(1, "Coucou %u \n", -3));
-	//printf("printf\t%d\n", printf("Coucou %u \n", -1));
+	printf("test %%x\n");
+	printf("ft_printf\t%d\n", ft_printf(1, "Coucou %x \n", 125475));
+	//printf("printf\t%d\n", printf("Coucou %x \n", 1042));
 	printf("\n");
-	
-
-	// printf("test %%x\n");
-	// printf("ft_printf\t%d\n", ft_printf(1, "Coucou %x \n", 1042));
-	// printf("printf\t%d\n", printf("Coucou %x \n", 1042));
-	// printf("\n");
 	
 	
 	// printf("test %%X\n");

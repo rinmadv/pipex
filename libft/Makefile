@@ -6,14 +6,14 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:49:59 by madavid           #+#    #+#              #
-#    Updated: 2023/07/25 20:30:38 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/26 16:36:54 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = ft_bzero.c \
 	ft_isalpha.c \
@@ -43,7 +43,8 @@ SRCS = ft_bzero.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
-	ft_litoa.c \
+	ft_uitoa.c \
+	ft_uitoa_hexa.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \

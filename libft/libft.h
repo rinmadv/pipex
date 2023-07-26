@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:57:16 by madavid           #+#    #+#             */
-/*   Updated: 2023/07/25 20:33:38 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/26 15:43:33 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
-char	*ft_litoa(unsigned int n);
+char	*ft_uitoa(unsigned int n);
+char	*ft_uitoa_hexa(unsigned int n, int c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
