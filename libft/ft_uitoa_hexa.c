@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 18:32:52 by marine            #+#    #+#             */
-/*   Updated: 2023/07/26 16:54:52 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/26 18:24:24 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,19 @@ char	*ft_uitoa_hexa(unsigned int n, int c)
 	}
 	i = 0;
 	j = ft_nblen(n) - 1;
+	printf("j: %d\n", j);
 	number = ft_calloc((ft_nblen(n) + 1), sizeof(char));
 	if (number == NULL)
 		return (NULL);
 	if (n == 0)
-		number[i] = base[0];
+		 number[i] = base[0];
 	while (j>= 0)
 	{
 		number[i] = base[n / ft_powsixteen(j)];
 		printf("number : %c\n", number[i]);
-		n = n - (ft_powsixteen(j--) * (number[i++] - base[0]));
+		n = (ft_powsixteen(j) * (number[i] - base[0]));
+		j--;
+		i++;
 	}
 	return (number);
 }
