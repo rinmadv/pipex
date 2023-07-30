@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 15:59:12 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 17:37:46 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ int	find_path(t_data *data, t_parse *current_arg, char *cmd)
 	return (1);
 }
 
+int	check_dots(char *cmd)
+{
+	if (ft_strncmp(cmd, ".", ft_strlen(cmd)) == 0)
+		return (1);
+	if (ft_strncmp(cmd, "..", ft_strlen(cmd)) == 0)
+		return (1);
+	return (0);
+}
+
 int	check_access(char *path)
 {
 	if (access(path, F_OK) != 0)
@@ -62,8 +71,8 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 {
 	char	*cmd;
 
-	if (!current_arg->command[0])
-		return (print_err(CMD, ""));
+	if (!current_arg->command[0] || check_dots(current_arg->command[0]) == 1)
+		return (print_err(CMD, current_arg->command[0]));
 	if (!data->path)
 	{
 		if (is_path(current_arg->command[0]) == 1)

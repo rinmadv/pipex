@@ -1,0 +1,29 @@
+total 96
+drwxr-xr-x  6 madavid 2022_paris  4096 Jul 30 17:37 .
+drwx------ 46 madavid 2022_paris 12288 Jul 30 17:38 ..
+drwxr-xr-x  8 madavid 2022_paris  4096 Jul 30 16:56 .git
+-rw-r--r--  1 madavid 2022_paris   430 Jul 30 16:56 .gitignore
+-rw-r--r--  1 madavid 2022_paris  1663 Jul 30 16:56 Makefile
+-rw-r--r--  1 madavid 2022_paris   615 Jul 30 16:56 README.md
+drwxr-xr-x  2 madavid 2022_paris  4096 Jul 30 16:56 header
+-rw-r--r--  1 madavid 2022_paris     0 Jul 30 17:07 hihi
+-rw-r--r--  1 madavid 2022_paris     0 Jul 30 17:38 jhn
+drwxr-xr-x  2 madavid 2022_paris  4096 Jul 30 17:37 libft
+-rw-r--r--  1 madavid 2022_paris    32 Jul 30 17:05 note.txt
+-rwxr-xr-x  1 madavid 2022_paris 48320 Jul 30 17:37 pipex
+drwxr-xr-x  4 madavid 2022_paris  4096 Jul 30 17:37 srcs
+total 104
+drwxr-xr-x  6 madavid 2022_paris  4096 Jul 30 17:38 .
+drwx------ 46 madavid 2022_paris 12288 Jul 30 17:38 ..
+drwxr-xr-x  8 madavid 2022_paris  4096 Jul 30 16:56 .git
+-rw-r--r--  1 madavid 2022_paris   430 Jul 30 16:56 .gitignore
+-rw-r--r--  1 madavid 2022_paris     3 Jul 30 17:38 .nfs000000000fe59ec2000002bb
+-rw-r--r--  1 madavid 2022_paris  1663 Jul 30 16:56 Makefile
+-rw-r--r--  1 madavid 2022_paris   615 Jul 30 16:56 README.md
+drwxr-xr-x  2 madavid 2022_paris  4096 Jul 30 16:56 header
+-rw-r--r--  1 madavid 2022_paris     0 Jul 30 17:07 hihi
+-rw-r--r--  1 madavid 2022_paris   767 Jul 30 17:38 jhn
+drwxr-xr-x  2 madavid 2022_paris  4096 Jul 30 17:37 libft
+-rw-r--r--  1 madavid 2022_paris    32 Jul 30 17:05 note.txt
+-rwxr-xr-x  1 madavid 2022_paris 48320 Jul 30 17:37 pipex
+drwxr-xr-x  4 madavid 2022_paris  4096 Jul 30 17:37 srcs

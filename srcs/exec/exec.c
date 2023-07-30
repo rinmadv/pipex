@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 16:54:39 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 17:16:01 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	execute_child(t_data *data, t_parse *arg, int pipe_fd)
 		ft_data_clear(data);
 		exit (1);
 	}
-	execve(arg->path, arg->command, data->path);
+	if (arg->path)
+		execve(arg->path, arg->command, data->path);
 	ft_data_clear(data);
 	exit (1);
 }

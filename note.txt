@@ -1,3 +1,1 @@
--- changer le printf erreur          ||
--- pour le heredoc, il faut 5 args   ||
 -- gerer le pb de cmd ".."			 ||
