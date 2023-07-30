@@ -6,11 +6,11 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:16:40 by marine            #+#    #+#              #
-#    Updated: 2023/07/16 02:07:28 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/30 15:36:13 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_FILES	= main.c \
+SRCS_FILES	= pipex.c \
 			parsing/parsing.c \
 			parsing/create_parse_node.c \
 			parsing/clean_parsing.c \

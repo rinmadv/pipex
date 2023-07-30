@@ -6,7 +6,7 @@
 #    By: madavid <madavid@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 21:49:59 by madavid           #+#    #+#              #
-#    Updated: 2023/07/26 16:36:54 by madavid          ###   ########.fr        #
+#    Updated: 2023/07/30 16:22:32 by madavid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,6 @@ SRCS = ft_bzero.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
-	ft_uitoa.c \
-	ft_uitoa_hexa.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
@@ -62,9 +60,7 @@ SRCS = ft_bzero.c \
 	ft_lstmap.c \
 	ft_get_next_line.c \
 	ft_printf_fd.c \
-	ft_printf_utils_fd.c \
-	#ft_printf_fd_new.c \
-	#ft_printf_utils_fd_new.c \
+	ft_printf_utils_fd.c 
 
 OBJS = $(SRCS:.c=.o) 
 

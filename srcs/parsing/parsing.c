@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/16 21:59:09 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 16:26:00 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 void	check_first_lst_cmd(t_parse *arg)
 {
 	arg = arg->next;
-	//dprintf(2, "premiere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	arg->first_cmd = true;
-	//dprintf(2, "premiere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	while (arg->next->type != outfile)
 		arg = arg->next;
-	//dprintf(2, "derniere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 	arg->last_cmd = true;
-	//dprintf(2, "derniere : %s, status first: %d, status last : %d\n", arg->command[0], arg->first_cmd, arg->last_cmd);
 }
 
 int	parse_envp(t_data *data, char **envp)

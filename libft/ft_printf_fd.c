@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 01:34:26 by marine            #+#    #+#             */
-/*   Updated: 2023/05/09 15:10:22 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 16:23:17 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_args_pf(int output, char c, va_list ap, int *n)
 	return ;
 }
 
-int	ft_printf(int output, const char *str, ...)
+int	ft_printf_fd(int output, const char *str, ...)
 {
 	int		i;
 	int		n;

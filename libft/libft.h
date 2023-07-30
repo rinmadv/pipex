@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 01:57:16 by madavid           #+#    #+#             */
-/*   Updated: 2023/07/26 15:43:33 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 16:22:52 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*ft_get_next_line(int fd);
-int		ft_printf(int output, const char *str, ...);
+int		ft_printf_fd(int output, const char *str, ...);
 void	ft_args_pf(int output, char c, va_list ap, int *n);
 void	ft_putchar_pf(int output, char c, int *n);
 void	ft_putstr_pf(int output, char *str, int *n);
