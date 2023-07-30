@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:57:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 16:26:00 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 18:37:16 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	parsing(char **argv, t_parse **argument, int argc, t_data *data)
 			data->here_doc = 1;
 			data->delimiter = argv[i + 1];
 			if (argc < 6 || heredoc(data->delimiter) != 0)
-				return (ft_parse_clear(argument), -1);
+				return (ft_putstr_fd("Wrong number of arguments\n", 2),
+					ft_parse_clear(argument), -1);
 		}
 		new = ft_node_new(argv[i], type, data);
 		if (new == NULL)

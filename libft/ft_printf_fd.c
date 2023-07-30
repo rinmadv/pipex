@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 01:34:26 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 16:23:17 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 18:38:06 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_args_pf(int output, char c, va_list ap, int *n)
 {
 	if (c == 'c')
 		return (ft_putchar_pf(output, va_arg(ap, int), n));
-	if (c == 's' )
+	if (c == 's')
 		return (ft_putstr_pf(output, va_arg(ap, char *), n));
 	if (c == 'p')
 		return (ft_putptr_pf(output, va_arg(ap, unsigned long int), n));

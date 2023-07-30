@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:19:58 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 17:16:42 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 18:29:05 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 
 	init_data(&data);
 	if (argc < 5)
-		return (1);
+		return (ft_putstr_fd("Wrong number of arguments\n", STDERR_FILENO), 1);
 	if (parsing(argv, &data.first_arg, argc, &data) == -1)
 		return (1);
 	check_first_lst_cmd(data.first_arg);

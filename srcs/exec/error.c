@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 02:03:25 by madavid           #+#    #+#             */
-/*   Updated: 2023/07/30 16:27:43 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:02:29 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	print_err(int type, char *cmd)
 		str_error = ft_strjoin(begining, " : no such file or directory\n");
 	if (str_error == NULL)
 		return (free (begining), -1);
-	ft_printf_fd(2, "%s", str_error);
+	ft_putstr_fd(str_error, STDERR_FILENO);
 	free(begining);
 	free(str_error);
 	return (0);

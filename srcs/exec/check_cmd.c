@@ -6,7 +6,7 @@
 /*   By: madavid <madavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:54:45 by marine            #+#    #+#             */
-/*   Updated: 2023/07/30 17:37:46 by madavid          ###   ########.fr       */
+/*   Updated: 2023/07/30 19:07:28 by madavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	check_dots(char *cmd)
 int	check_access(char *path)
 {
 	if (access(path, F_OK) != 0)
-		return (print_err(CMD, path));
+		return (print_err(CMD, path), 1);
 	if (access(path, X_OK) != 0)
-		return (print_err(PERM, path));
+		return (print_err(PERM, path), 1);
 	return (0);
 }
 
@@ -73,13 +73,8 @@ int	check_cmd(t_data *data, t_parse *current_arg)
 
 	if (!current_arg->command[0] || check_dots(current_arg->command[0]) == 1)
 		return (print_err(CMD, current_arg->command[0]));
-	if (!data->path)
-	{
-		if (is_path(current_arg->command[0]) == 1)
-			current_arg->path = current_arg->command[0];
-		else
-			return (print_err(CMD, current_arg->command[0]));
-	}
+	if (is_path(current_arg->command[0]) == 1)
+		current_arg->path = current_arg->command[0];
 	else
 	{
 		cmd = ft_strjoin("/", current_arg->command[0]);
